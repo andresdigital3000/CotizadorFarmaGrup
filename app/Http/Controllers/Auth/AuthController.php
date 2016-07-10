@@ -1,10 +1,10 @@
 <?php
 
-namespace Cinema\Http\Controllers\Auth;
+namespace Cotizador_Farmagroup\Http\Controllers\Auth;
 
-use Cinema\User;
+use Cotizador_Farmagroup\User;
 use Validator;
-use Cinema\Http\Controllers\Controller;
+use Cotizador_Farmagroup\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

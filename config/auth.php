@@ -67,7 +67,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Cinema\User::class,
+            'model' => 'Cotizador_Farmagroup\User',
+            'table' => 'users',
         ],
 
         // 'users' => [

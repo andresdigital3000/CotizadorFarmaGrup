@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Events;
+namespace Cotizador_Farmagroup\Events;
 
 abstract class Event
 {

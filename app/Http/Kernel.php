@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Http;
+namespace Cotizador_Farmagroup\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -24,11 +24,11 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Cinema\Http\Middleware\EncryptCookies::class,
+            \Cotizador_Farmagroup\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Cinema\Http\Middleware\VerifyCsrfToken::class,
+            \Cotizador_Farmagroup\Http\Middleware\VerifyCsrfToken::class,
         ],
 
         'api' => [
@@ -44,10 +44,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Cinema\Http\Middleware\Authenticate::class,
+        'auth' => \Cotizador_Farmagroup\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
-        'guest' => \Cinema\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \Cotizador_Farmagroup\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

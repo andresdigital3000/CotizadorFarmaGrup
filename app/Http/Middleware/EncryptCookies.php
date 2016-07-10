@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Http\Middleware;
+namespace Cotizador_Farmagroup\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

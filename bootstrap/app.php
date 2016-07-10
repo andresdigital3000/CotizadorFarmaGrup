@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    Cinema\Http\Kernel::class
+    Cotizador_Farmagroup\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Cinema\Console\Kernel::class
+    Cotizador_Farmagroup\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Cinema\Exceptions\Handler::class
+    Cotizador_Farmagroup\Exceptions\Handler::class
 );
 
 /*

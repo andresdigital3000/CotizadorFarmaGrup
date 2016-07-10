@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Providers;
+namespace Cotizador_Farmagroup\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Cinema\Http\Controllers';
+    protected $namespace = 'Cotizador_Farmagroup\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

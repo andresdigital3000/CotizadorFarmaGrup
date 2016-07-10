@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Http\Middleware;
+namespace Cotizador_Farmagroup\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

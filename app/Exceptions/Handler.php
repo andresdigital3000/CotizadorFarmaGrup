@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Exceptions;
+namespace Cotizador_Farmagroup\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

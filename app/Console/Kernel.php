@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Console;
+namespace Cotizador_Farmagroup\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Providers;
+namespace Cotizador_Farmagroup\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Cinema\Model' => 'Cinema\Policies\ModelPolicy',
+        'Cotizador_Farmagroup\Model' => 'Cotizador_Farmagroup\Policies\ModelPolicy',
     ];
 
     /**

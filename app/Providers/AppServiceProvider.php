@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Providers;
+namespace Cotizador_Farmagroup\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

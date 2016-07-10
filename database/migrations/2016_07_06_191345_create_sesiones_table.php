@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGenresTable extends Migration
+class CreateSesionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateGenresTable extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('sesiones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('genre');
+            $table->string('usuario');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ class CreateGenresTable extends Migration
      */
     public function down()
     {
-        Schema::drop('genres');
+        Schema::drop('sesiones');
     }
 }

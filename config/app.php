@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,15 +148,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        Collective\Html\HtmlServiceProvider::class,
-
         /*
          * Application Service Providers...
          */
-        Cinema\Providers\AppServiceProvider::class,
-        Cinema\Providers\AuthServiceProvider::class,
-        Cinema\Providers\EventServiceProvider::class,
-        Cinema\Providers\RouteServiceProvider::class,
+        Cotizador_Farmagroup\Providers\AppServiceProvider::class,
+        Cotizador_Farmagroup\Providers\AuthServiceProvider::class,
+        Cotizador_Farmagroup\Providers\EventServiceProvider::class,
+        Cotizador_Farmagroup\Providers\RouteServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -203,8 +202,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
 
     ],
 

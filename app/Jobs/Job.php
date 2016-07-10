@@ -1,6 +1,6 @@
 <?php
 
-namespace Cinema\Jobs;
+namespace Cotizador_Farmagroup\Jobs;
 
 use Illuminate\Bus\Queueable;
 
