@@ -1,8 +1,8 @@
 <?php
 
-namespace Cotizador_Farmagroup\Http\Controllers\Auth;
+namespace CotizadorAF\Http\Controllers\Auth;
 
-use Cotizador_Farmagroup\Http\Controllers\Controller;
+use CotizadorAF\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Cotizador_Farmagroup\User::class,
+        'model' => CotizadorAF\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

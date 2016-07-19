@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Exceptions;
+namespace CotizadorAF\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

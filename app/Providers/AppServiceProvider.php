@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Providers;
+namespace CotizadorAF\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

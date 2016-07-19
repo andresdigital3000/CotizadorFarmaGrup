@@ -1,8 +1,8 @@
 <?php
 
-namespace Cotizador_Farmagroup\Http\Controllers;
+namespace CotizadorAF\Http\Controllers;
 
-use Cotizador_Farmagroup\Http\Requests;
+use CotizadorAF\Http\Requests;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,8 +22,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         return view('home');
     }
 }

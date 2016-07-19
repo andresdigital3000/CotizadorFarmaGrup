@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Http\Controllers;
+namespace CotizadorAF\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

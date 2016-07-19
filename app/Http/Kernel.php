@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Http;
+namespace CotizadorAF\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -24,11 +24,11 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Cotizador_Farmagroup\Http\Middleware\EncryptCookies::class,
+            \CotizadorAF\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Cotizador_Farmagroup\Http\Middleware\VerifyCsrfToken::class,
+            \CotizadorAF\Http\Middleware\VerifyCsrfToken::class,
         ],
 
         'api' => [
@@ -44,10 +44,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Cotizador_Farmagroup\Http\Middleware\Authenticate::class,
+        'auth' => \CotizadorAF\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
-        'guest' => \Cotizador_Farmagroup\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \CotizadorAF\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

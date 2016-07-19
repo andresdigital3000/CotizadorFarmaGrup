@@ -1,10 +1,10 @@
 <?php
 
-namespace Cotizador_Farmagroup\Http\Controllers\Auth;
+namespace CotizadorAF\Http\Controllers\Auth;
 
-use Cotizador_Farmagroup\User;
+use CotizadorAF\User;
 use Validator;
-use Cotizador_Farmagroup\Http\Controllers\Controller;
+use CotizadorAF\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -49,9 +49,13 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'id' => 'required',
+            'nombre' => 'required',
+            'extension' => 'required',
+            'cargo' => 'required',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name' => 'required|max:255|unique:users',
+            'password' => 'required|min:6',
         ]);
     }
 
@@ -64,9 +68,15 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'id' => $data['id'],
+            'cod_perfil' => $data['cod_perfil'],
+            'cod_dependencia' => $data['cod_dependencia'],
+            'nombre' => $data['nombre'],
+            'extension' => $data['extension'],
+            'cargo' => $data['cargo'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'name' => $data['name'],
+            'password' => $data['password'],
         ]);
     }
 }

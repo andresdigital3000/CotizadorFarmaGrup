@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Http\Requests;
+namespace CotizadorAF\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

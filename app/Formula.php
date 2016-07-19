@@ -1,10 +1,10 @@
 <?php
 
-namespace Cotizador_Farmagroup;
+namespace CotizadorAF;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Formula extends Model
 {
-    protected $table= "forulas";
+    protected $table= "formulas";
 }

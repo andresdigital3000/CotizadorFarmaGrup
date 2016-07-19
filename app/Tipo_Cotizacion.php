@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup;
+namespace CotizadorAF;
 
 use Illuminate\Database\Eloquent\Model;
 

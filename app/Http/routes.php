@@ -11,30 +11,14 @@
 |
 */
 
-Route::get('/','FrontController@index');
-
-Route::resource('front','FrontController');
-
-Route::resource('empleados','EmpleadosController');
-Route::post('registro',['as'=>'empleados.registro','uses'=>'EmpleadosController@registro']);
-Route::post('perfil',['as'=>'empleados.perfil','uses'=>'EmpleadosController@perfil']);
-Route::post('dependencia',['as'=>'empleados.dependencia','uses'=>'EmpleadosController@dependencia']);
-Route::get('vperfil',['as'=>'empleados.vperfil','uses'=>'EmpleadosController@viewperfil']);
-Route::get('vdependencia',['as'=>'empleados.vdependencia','uses'=>'EmpleadosController@viewdependencia']);
-/*
-Route::resource('empleado','EmpleadoController');
-
-Route::resource('lara','LaravelController');
-Route::resource('dependencia','DependenciaController');
-Route::resource('perfil','PerfilController');
-Route::resource('pagina','PaginaController');
-Route::resource('perfpagi','Perf_PagiController');
-Route::get('/', function () {
-    return view('index');
-});
-
-
 Route::auth();
-
 Route::get('/', 'HomeController@index');
-*/
+Route::resource('usuario','UsuarioController');
+Route::resource('perfiles','PerfilesController');
+Route::resource('dependencias','DependenciasController');
+Route::resource('paginas','PaginasController');
+Route::resource('clientes','ClientesController');
+Route::resource('proveedores','ProveedoresController');
+Route::resource('productos','ProductosController');
+Route::resource('cotizaciones','CotizacionesController');
+Route::resource('reportes','ReportesController');

@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG'),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Bogota',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'locale' => 'es',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -151,10 +151,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Cotizador_Farmagroup\Providers\AppServiceProvider::class,
-        Cotizador_Farmagroup\Providers\AuthServiceProvider::class,
-        Cotizador_Farmagroup\Providers\EventServiceProvider::class,
-        Cotizador_Farmagroup\Providers\RouteServiceProvider::class,
+        CotizadorAF\Providers\AppServiceProvider::class,
+        CotizadorAF\Providers\AuthServiceProvider::class,
+        CotizadorAF\Providers\EventServiceProvider::class,
+        CotizadorAF\Providers\RouteServiceProvider::class,
+
         Collective\Html\HtmlServiceProvider::class,
 
     ],
@@ -202,8 +203,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Html' => Collective\Html\HtmlFacade::class,
+
         'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

@@ -5,6 +5,7 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use DB; 
 
 trait AuthenticatesUsers
 {
@@ -115,7 +116,8 @@ trait AuthenticatesUsers
             return $this->authenticated($request, Auth::guard($this->getGuard())->user());
         }
 
-        return redirect()->intended($this->redirectPath());
+        //return redirect()->intended($this->redirectPath());
+        return view('home');
     }
 
     /**
@@ -142,7 +144,7 @@ trait AuthenticatesUsers
     {
         return Lang::has('auth.failed')
                 ? Lang::get('auth.failed')
-                : 'These credentials do not match our records.';
+                : 'Estas credenciales no coinciden con nuestros registros.';
     }
 
     /**
@@ -195,7 +197,7 @@ trait AuthenticatesUsers
      */
     public function loginUsername()
     {
-        return property_exists($this, 'username') ? $this->username : 'email';
+        return property_exists($this, 'username') ? $this->username : 'name';
     }
 
     /**
