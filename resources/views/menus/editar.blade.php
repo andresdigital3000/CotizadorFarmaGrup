@@ -7,10 +7,10 @@
 	            <div class="panel panel-default">
 	                <div class="panel-heading" align="center"><font size="4">Actualizacion Datos</font></div>
 	                <div class="panel-body">
-						{!!Form::model($user,['route'=>['usuario.update',$user->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
+						{!!Form::model($menu,['route'=>['menus.update',$menu->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
 							{{ csrf_field() }}
 
-							@include('usuario.forms.usr_ed')
+							@include('menus.forms.menu_ed')
 
 							<div class="form-group">
 						        <div class="col-md-6 col-md-offset-4">
@@ -26,7 +26,7 @@
 	    </div>
 	</div>
 
-		{!!Form::open(['route'=>['usuario.destroy', $user->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+		{!!Form::open(['route'=>['menus.destroy', $menu->id], 'method'=>'DELETE', 'align'=>'right'])!!}
 			{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
 		{!!Form::close()!!}
 @endsection

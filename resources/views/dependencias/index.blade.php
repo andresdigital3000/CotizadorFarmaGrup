@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master',['menus' => $menus])
 	@include('alerts.success')
 	@section('content')
 	<table class="table">

@@ -17,6 +17,7 @@ class CreatePaginasTable extends Migration
             $table->integer('cod_menu')->unsigned();
             $table->foreign('cod_menu')->references('id')->on('menus');
             $table->string('nom_pagina');
+            $table->string('url');
             $table->timestamps();
         });
     }

@@ -19,21 +19,9 @@ class CreatePerfPagisTable extends Migration
             $table->integer('cod_pagina')->unsigned();
             $table->foreign('cod_pagina')->references('id')->on('paginas');
 
-            $table->boolean('cli_modfcar');
-            $table->boolean('cli_elmnar');
-            $table->boolean('cli_consltar');
-            $table->boolean('prov_crear');
-            $table->boolean('prov_modfcar');
-            $table->boolean('prov_elmnar');
-            $table->boolean('prov_consltar');
-            $table->boolean('prodadm_crear');
-            $table->boolean('prodadm_modfcar');
-            $table->boolean('prodadm_elmnar');
-            $table->boolean('prodadm_consltar');
-            $table->boolean('prodcons_crear');
-            $table->boolean('prodcons_modfcar');
-            $table->boolean('prodcons_elmnar');
-            $table->boolean('prodcons_consltar');
+            $table->boolean('crear');
+            $table->boolean('eliminar');
+            $table->boolean('actualizar');
 
             $table->timestamps();
         });

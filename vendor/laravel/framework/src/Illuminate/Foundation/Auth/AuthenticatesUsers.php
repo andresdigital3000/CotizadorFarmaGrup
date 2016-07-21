@@ -116,8 +116,13 @@ trait AuthenticatesUsers
             return $this->authenticated($request, Auth::guard($this->getGuard())->user());
         }
 
-        //return redirect()->intended($this->redirectPath());
-        return view('home');
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        return view('home',compact('menus'));
     }
 
     /**

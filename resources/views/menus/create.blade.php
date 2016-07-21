@@ -7,10 +7,10 @@
 	            <div class="panel panel-default">
 	                <div class="panel-heading" align="center"><font size="4">Registro Empleado</font></div>
 	                <div class="panel-body">
-	                	{!!Form::open(['route'=>'usuario.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}	 
+	                	{!!Form::open(['route'=>'menus.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}	 
 	                        {{ csrf_field() }}
 
-	                        @include('usuario.forms.usr')
+	                        @include('menus.forms.menu')
 
 	                        <div class="form-group">
 	                            <div class="col-md-6 col-md-offset-4">

@@ -1,12 +1,19 @@
 <?php
 
-namespace Cinema\Http\Controllers;
+namespace CotizadorAF\Http\Controllers;
 
 use Illuminate\Http\Request;
+use CotizadorAF\Http\Requests;
+use CotizadorAF\Http\Requests\MenusCreateRequest;
+use CotizadorAF\Http\Requests\MenusUpdateRequest;
+use CotizadorAF\Http\Controllers\Controller;
+use CotizadorAF\Menu;
+use DB;
+use Session;
+use Redirect;
+use Illuminate\Routing\Route;
 
-use Cinema\Http\Requests;
-
-class MovieController extends Controller
+class MenusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +21,9 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return "Estoy en el index del Controlador";
+    {        
+        $menus = Menu::All();
+        return view('menus.index',compact('menus'));
     }
 
     /**
@@ -25,7 +33,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-       return "Estoy en el create para el formulario";
+        return view('menus.create');
     }
 
     /**
@@ -34,9 +42,11 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenusCreateRequest $request)
     {
-        //
+        Menu::create($request->all());
+        Session::flash('message','Menu Creado Correctamente');
+        return Redirect::to('/menus');
     }
 
     /**
@@ -58,7 +68,8 @@ class MovieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu=Menu::find($id);        
+        return view('menus.editar',['menu'=>$menu]);
     }
 
     /**
@@ -68,9 +79,14 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MenusUpdateRequest $request, $id)
     {
-        //
+        $menu=Menu::find($id);
+        $menu->fill($request->all());
+        $menu->save();
+        
+        Session::flash('message','Menu Actualizado Correctamente');
+        return Redirect::to('/menus');
     }
 
     /**
@@ -81,6 +97,8 @@ class MovieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Menu::destroy($id);
+        Session::flash('message','Menu Eliminado Correctamente');
+        return Redirect::to('/menus');
     }
 }

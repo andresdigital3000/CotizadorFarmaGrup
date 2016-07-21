@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\DependenciasCreateRequest;
 use CotizadorAF\Http\Requests\DependenciasUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Dependencias;
+use Auth;
 use DB;
 use Session;
 use Redirect;
@@ -22,8 +23,14 @@ class DependenciasController extends Controller
      */
     public function index()
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
         $dependencias = Dependencias::All();
-        return view('dependencias.index',compact('dependencias'));
+        return view('dependencias.index',compact('dependencias','menus'));
     }
 
     /**
@@ -33,7 +40,13 @@ class DependenciasController extends Controller
      */
     public function create()
     {
-        return view('dependencias.create');
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        return view('dependencias.create',compact('menus'));
     }
 
     /**
@@ -68,8 +81,14 @@ class DependenciasController extends Controller
      */
     public function edit($id)
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
         $dependencia=Dependencias::find($id);        
-        return view('dependencias.editar',['dependencia'=>$dependencia]);
+        return view('dependencias.editar',compact('dependencia','menus'));
     }
 
     /**

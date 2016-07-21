@@ -4,7 +4,7 @@ namespace CotizadorAF\Http\Requests;
 
 use CotizadorAF\Http\Requests\Request;
 
-class PaginasUpdateRequest extends Request
+class MenusCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class PaginasUpdateRequest extends Request
     public function rules()
     {
         return [
+            //
         ];
     }
 }

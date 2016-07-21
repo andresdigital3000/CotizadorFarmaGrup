@@ -1,19 +1,16 @@
 <?php  
 	namespace CotizadorAF\Http\Controllers;
-	use Illuminate\Http\Request;
-	use CotizadorAF\Http\Requests;
 	use DB;
 	use Auth;
 	$perfil = DB::table('perfiles')->where('id', Auth::user()->cod_perfil)->first();
 ?>
 
-@extends('layouts.master')
+@extends('layouts.master',['menus' => $menus]) 
     
 @section('content')
 	<!DOCTYPE html>
 	<html>
 		<head>
-			<title>EMPLEADOS</title>
 			<script language="JavaScript" type="text/javascript">
 			    function mueveReloj(){
 			        if (!document.layers&&!document.all&&!document.getElementById)
@@ -58,7 +55,7 @@
 		    	<font face="ComicSans" size="20" color='205CB7'>
 		    		<?php echo date('l jS \of F Y');?>
 					<span id="liveclock"></span>
-				</font>	  
+				</font>	
 			</form>	
 		</body>
 	</html>					

@@ -3,20 +3,15 @@
 	@section('content')
 	<table class="table">
 		<thead>
+			<th>Codigo</th>
 			<th>Nombre</th>
-			<th>Cargo</th>
-			<th>Extension</th>
-			<th>Correo</th>
-			<th>Operacion</th>
 		</thead>
-		@foreach($users as $user)
+		@foreach($menus as $menu)
 			<tbody>
-				<td>{{$user->nombre}}</td>
-				<td>{{$user->cargo}}</td>
-				<td>{{$user->extension}}</td>
-				<td>{{$user->email}}</td>
+				<td>{{$menu->id}}</td>
+				<td>{{$menu->nom_menu}}</td>
 				<td>
-					{!!link_to_route('usuario.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+					{!!link_to_route('menus.edit', $title = 'Editar', $parameters = $menu->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
 			</tbody>
 		@endforeach

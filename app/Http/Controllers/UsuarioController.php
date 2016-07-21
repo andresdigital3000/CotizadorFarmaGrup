@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\UserCreateRequest;
 use CotizadorAF\Http\Requests\UserUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\User;
+use Auth;
 use DB;
 use Session;
 use Redirect;
@@ -29,8 +30,16 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+
         $users = User::All();
-        return view('usuario.index',compact('users'));
+
+        return view('usuario.index',compact('users','menus'));
     }
 
     /**
@@ -40,10 +49,17 @@ class UsuarioController extends Controller
      */
     public function create()
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+
         $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
         $datosDep = DB::table('dependencias')->lists('dependencia','id');
 
-        return view('usuario.create',compact('datosPerf'),compact('datosDep'));
+        return view('usuario.create',compact('datosPerf','datosDep','menus'));
     }
 
     /**
@@ -78,10 +94,17 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+
         $user=User::find($id);        
         $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
         $datosDep = DB::table('dependencias')->lists('dependencia','id');
-        return view('usuario.editar',['user'=>$user,'datosPerf'=>$datosPerf,'datosDep'=>$datosDep]);
+        return view('usuario.editar',compact('user','datosPerf','datosDep','menus'));
     }
 
     /**

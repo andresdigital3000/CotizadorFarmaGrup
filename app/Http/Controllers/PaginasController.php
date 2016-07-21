@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\PaginasCreateRequest;
 use CotizadorAF\Http\Requests\PaginasUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Paginas;
+use Auth;
 use DB;
 use Session;
 use Redirect;
@@ -22,8 +23,14 @@ class PaginasController extends Controller
      */
     public function index()
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
         $paginas = Paginas::All();
-        return view('paginas.index',compact('paginas'));
+        return view('paginas.index',compact('paginas','menus'));
     }
 
     /**
@@ -33,7 +40,14 @@ class PaginasController extends Controller
      */
     public function create()
     {
-        return view('paginas.create');
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        $cod_menu = DB::table('menus')->lists('nom_menu','id');
+        return view('paginas.create',compact('cod_menu','menus'));
     }
 
     /**
@@ -68,8 +82,14 @@ class PaginasController extends Controller
      */
     public function edit($id)
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
         $pagina=Paginas::find($id);        
-        return view('paginas.editar',['pagina'=>$pagina]);
+        return view('paginas.editar',compact('pagina','menus'));
     }
 
     /**

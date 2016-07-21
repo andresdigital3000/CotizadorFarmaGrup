@@ -17,6 +17,7 @@ Route::resource('usuario','UsuarioController');
 Route::resource('perfiles','PerfilesController');
 Route::resource('dependencias','DependenciasController');
 Route::resource('paginas','PaginasController');
+Route::resource('menus','MenusController');
 Route::resource('clientes','ClientesController');
 Route::resource('proveedores','ProveedoresController');
 Route::resource('productos','ProductosController');

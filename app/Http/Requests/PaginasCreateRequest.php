@@ -24,7 +24,6 @@ class PaginasCreateRequest extends Request
     public function rules()
     {
         return [
-            'nom_pagina' => 'required',
         ];
     }
 }

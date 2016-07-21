@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\PerfilesCreateRequest;
 use CotizadorAF\Http\Requests\PerfilesUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Perfiles;
+use Auth;
 use DB;
 use Session;
 use Redirect;
@@ -22,8 +23,14 @@ class PerfilesController extends Controller
      */
     public function index()
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
         $perfiles = Perfiles::All();
-        return view('perfiles.index',compact('perfiles'));
+        return view('perfiles.index',compact('perfiles','menus'));
     }
 
     /**
@@ -33,7 +40,13 @@ class PerfilesController extends Controller
      */
     public function create()
     {
-        return view('perfiles.create');
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        return view('perfiles.create',compact('menus'));
     }
 
     /**
@@ -68,8 +81,14 @@ class PerfilesController extends Controller
      */
     public function edit($id)
     {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
         $perfil=Perfiles::find($id);        
-        return view('perfiles.editar',['perfil'=>$perfil]);
+        return view('perfiles.editar',compact('perfil','menus'));
     }
 
     /**
