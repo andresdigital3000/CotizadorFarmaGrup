@@ -1,32 +1,6 @@
 @extends('layouts.master',['menus' => $menus])
 @section('content')
 @include('alerts.request')
-	<br> <br>
-	<table>
-		<td>
-			<th>
-				{!!Form::open(['route'=>'admin.perfil','method'=>'GET'])!!}
-				{{ csrf_field() }}
-				    <div class="form-group">
-				        <div>
-				            <button type="submit" class="btn btn-primary"></i> Nuevo Perfil</button>
-				        </div>                            
-				    </div>
-				{!!Form::close()!!}
-			</th>
-			<th align="center" width="50%">
-				{!!Form::open(['route'=>'admin.dependencia','method'=>'GET'])!!}
-				{{ csrf_field() }}
-				    <div class="form-group">
-				        <div>
-					        <button type="submit" class="btn btn-primary"></i> Nueva Dependencia</button>
-				        </div>                            
-				    </div>
-				{!!Form::close()!!}
-			</th>
-		</td>
-	</table>
-
 	<div>
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">

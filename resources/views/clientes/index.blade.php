@@ -9,14 +9,14 @@
 			<th>Correo</th>
 			<th>Operacion</th>
 		</thead>
-		@foreach($users as $user)
+		@foreach($clientes as $cliente)
 			<tbody>
-				<td>{{$user->nombre}}</td>
-				<td>{{$user->cargo}}</td>
-				<td>{{$user->extension}}</td>
-				<td>{{$user->email}}</td>
+				<td>{{$cliente->nombre}}</td>
+				<td>{{$cliente->cargo}}</td>
+				<td>{{$cliente->extension}}</td>
+				<td>{{$cliente->email}}</td>
 				<td>
-					{!!link_to_route('usuario.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+					{!!link_to_route('clientes.edit', $title = 'Editar', $parameters = $cliente->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
 			</tbody>
 		@endforeach

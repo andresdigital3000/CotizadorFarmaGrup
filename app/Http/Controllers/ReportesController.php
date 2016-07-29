@@ -4,41 +4,120 @@ namespace CotizadorAF\Http\Controllers;
 
 use Illuminate\Http\Request;
 use CotizadorAF\Http\Requests;
-use CotizadorAF\Http\Requests\UserCreateRequest;
-use CotizadorAF\Http\Requests\UserUpdateRequest;
+use CotizadorAF\Http\Requests\ReportesCreateRequest;
+use CotizadorAF\Http\Requests\ReportesUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Reportes;
+use Auth;
+use DB;
 use Session;
 use Redirect;
 use Illuminate\Routing\Route;
 
 class ReportesController extends Controller
 {
-    public function index(){
-        return "HOLA DESDE EL INDEX DE LARAVELCONTROLLER";
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        $reportes = Reportes::All();
+        return view('reportes.index',compact('reportes','menus'));
     }
 
-    public function create(){
-        return "HOLA DESDE EL CREATE DE LARAAVELCONTROLLER";
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        return view('reportes.create',compact('menus'));
     }
 
-    public function store(){
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ReportesCreateRequest $request)
+    {
+        Reportes::create($request->all());
+        Session::flash('message','Reporte Creado Correctamente');
+        return Redirect::to('/reportes');
     }
 
-    public function show($id){
-
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
-    public function edit($id){
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        $reporte=Reportes::find($id);        
+        return view('reportes.editar',compact('reporte','menus'));
     }
 
-    public function update($id){
-
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ReportesUpdateRequest $request, $id)
+    {
+        $reporte=Reportes::find($id);
+        $reporte->fill($request->all());
+        $reporte->save();
+        
+        Session::flash('message','Reporte Actualizado Correctamente');
+        return Redirect::to('/reportes');
     }
 
-    public function destroy($id){
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Reportes::destroy($id);
+        Session::flash('message','Reporte Eliminado Correctamente');
+        return Redirect::to('/reportes');
     }
 }

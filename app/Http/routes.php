@@ -23,3 +23,4 @@ Route::resource('proveedores','ProveedoresController');
 Route::resource('productos','ProductosController');
 Route::resource('cotizaciones','CotizacionesController');
 Route::resource('reportes','ReportesController');
+Route::resource('perfpag','PerfPagisController');

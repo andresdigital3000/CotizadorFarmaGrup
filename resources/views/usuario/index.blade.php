@@ -7,7 +7,6 @@
 			<th>Cargo</th>
 			<th>Extension</th>
 			<th>Correo</th>
-			<th>Operacion</th>
 		</thead>
 		@foreach($users as $user)
 			<tbody>

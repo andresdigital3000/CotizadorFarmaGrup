@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\PerfilesCreateRequest;
 use CotizadorAF\Http\Requests\PerfilesUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Perfiles;
+use CotizadorAF\Paginas;
 use Auth;
 use DB;
 use Session;
@@ -57,9 +58,17 @@ class PerfilesController extends Controller
      */
     public function store(PerfilesCreateRequest $request)
     {
-        Perfiles::create($request->all());
-        Session::flash('message','Perfil Creada Correctamente');
-        return Redirect::to('/perfiles');
+        $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+        Perfiles::create($request->all()); 
+        $perf=DB::table('perfiles')->where('nomperfil',$request['nomperfil'])->first(); 
+        $paginas=Paginas::All();  
+        //Session::flash('message','Perfil Creada Correctamente');
+        return view('perf_pag.index',compact('perf','menus','paginas'));
     }
 
     /**

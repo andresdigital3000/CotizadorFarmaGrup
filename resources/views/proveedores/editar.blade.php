@@ -26,7 +26,7 @@
 	    </div>
 	</div>
 
-		{!!Form::open(['route'=>['usuario.destroy', $user], 'method'=>'DELETE', 'align'=>'right'])!!}
+		{!!Form::open(['route'=>['usuario.destroy', $user->id], 'method'=>'DELETE', 'align'=>'right'])!!}
 			{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
 		{!!Form::close()!!}
 @endsection
