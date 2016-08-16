@@ -25,8 +25,4 @@
 	        </div>
 	    </div>
 	</div>
-
-		{!!Form::open(['route'=>['paginas.destroy', $pagina->id], 'method'=>'DELETE', 'align'=>'right'])!!}
-			{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
-		{!!Form::close()!!}
 @endsection

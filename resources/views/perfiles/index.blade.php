@@ -15,6 +15,11 @@
 				<td>
 					{!!link_to_route('perfiles.edit', $title = 'Editar', $parameters = $perfil->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
+				<td>
+					{!!Form::open(['route'=>['perfiles.destroy', $perfil->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+					{!!Form::close()!!}
+				</td>
 			</tbody>
 		@endforeach
 	</table>

@@ -23,14 +23,7 @@ class PerfPagisController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $perfiles = Perf_Pagi::All();
-        return view('perfiles.index',compact('perfiles','menus'));
+        
     }
 
     /**
@@ -40,13 +33,7 @@ class PerfPagisController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        return view('perfiles.create',compact('menus'));
+        
     }
 
     /**
@@ -57,27 +44,80 @@ class PerfPagisController extends Controller
      */
     public function store(PerfPagisCreateRequest $request)
     {
-        if (isset($_POST['ver'])) {
-            if (is_array($_POST['ver'])) {
-                $selected = '';
-                $num_countries = count($_POST['ver']);
-                $current = 0;
-                foreach ($_POST['ver'] as $key => $value) {
-                    if ($current != $num_countries-1)
-                        $selected .= $value.', ';
-                    else
-                        $selected .= $value.'.';
-                    $current++;
+        $ver=$request['ver'];
+        $act=$request['act'];
+        $eli=$request['eli'];
+
+        $arrlengthver = count($ver);
+        if($arrlengthver!=0){
+            for($x = 0; $x < $arrlengthver; $x++) {
+                $mat[$x][0]=$request['id_perf'];
+                $mat[$x][1]=$ver[$x];
+                $mat[$x][2]=1;
+            }
+
+            $arrlengthact = count($act);
+            if($arrlengthact==0){            
+                foreach ($mat as $key => $valor){  
+                    $mat[$key][3]=0;
+                }            
+            }else{
+                for($x = 0; $x < $arrlengthact; $x++) {
+                    foreach ($mat as $key => $value) {
+                        if (in_array($act[$x],$value)){                
+                            $mat[$key][3]=1;
+                        }elseif (!isset($mat[$key][3])) {
+                            $mat[$key][3]=0;
+                        }
+                    }
                 }
             }
-            return '<div>Has seleccionado: '.$selected.'</div>';
-        }
-        //Perf_Pagi::create($request->all());
-        //Session::flash('message','Permiso Creado Correctamente');
-        //return Redirect::to('/perfiles');
-        //return view('perf_pag.create');
-    }
 
+            $arrlengtheli = count($eli);
+            if($arrlengtheli==0){
+                foreach ($mat as $key => $valor){  
+                    $mat[$key][4]=0;
+                }
+            }else{
+                for($x = 0; $x < $arrlengtheli; $x++) {
+                    foreach ($mat as $key => $value) {
+                        if (in_array($eli[$x],$value)){                    
+                            $mat[$key][4]=1; 
+                        }elseif (!isset($mat[$key][4])) {
+                            $mat[$key][4]=0;
+                        }
+                    }
+                }    
+            }
+            
+            foreach ($mat as $key => $valor){  
+                Perf_Pagi::create([
+                    'cod_perf' => $mat[$key][0],
+                    'cod_pagina' => $mat[$key][1],
+                    'ver' => $mat[$key][2],
+                    'actualizar' => $mat[$key][3],
+                    'eliminar' => $mat[$key][4],
+                ]);     
+            }            
+            Session::flash('message','Perfil Creado Correctamente');
+            return Redirect::to('/perfiles');
+        }else{
+            print '<script language="JavaScript">'; 
+            print 'alert("Debe otorgar permisos");'; 
+            print '</script>';
+            $menus = DB::table('paginas')
+            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
+            ->where('cod_perf', Auth::user()->cod_perfil)
+            ->join('menus','paginas.cod_menu','=', 'menus.id')
+            ->select('nom_pagina', 'url')
+            ->get();
+            Perfiles::create($request->all()); 
+            $perf=DB::table('perfiles')->where('nomperfil',$request['nomperfil'])->first(); 
+            $paginas=Paginas::All();  
+            return view('perf_pag.index',compact('perf','menus','paginas'));
+        }
+    }
+    
     /**
      * Display the specified resource.
      *
@@ -97,14 +137,7 @@ class PerfPagisController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $perfil=Perf_Pagi::find($id);        
-        return view('perfiles.editar',compact('perfil','menus'));
+        
     }
 
     /**
@@ -116,12 +149,7 @@ class PerfPagisController extends Controller
      */
     public function update(PerfPagisUpdateRequest $request, $id)
     {
-        $perfil=Perf_Pagi::find($id);
-        $perfil->fill($request->all());
-        $perfil->save();
         
-        Session::flash('message','Permiso Actualizado Correctamente');
-        return Redirect::to('/perfiles');
     }
 
     /**
@@ -132,8 +160,6 @@ class PerfPagisController extends Controller
      */
     public function destroy($id)
     {
-        Perf_Pagi::destroy($id);
-        Session::flash('message','Permiso Eliminado Correctamente');
-        return Redirect::to('/perfiles');
+        
     }
 }

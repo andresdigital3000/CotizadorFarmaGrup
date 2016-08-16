@@ -15,7 +15,7 @@
 							<div class="form-group">
 						        <div class="col-md-6 col-md-offset-4">
 							        <button type="submit" class="btn btn-primary">
-							        	<i class="fa fa-btn fa-user"></i> Actualizar
+							        	<i class="fa fa-btn fa-user"></i> Siguiente
 							        </button>
 						        </div>
 					        </div>
@@ -25,8 +25,4 @@
 	        </div>
 	    </div>
 	</div>
-
-		{!!Form::open(['route'=>['perfiles.destroy', $perfil->id], 'method'=>'DELETE', 'align'=>'right'])!!}
-			{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
-		{!!Form::close()!!}
 @endsection

@@ -7,10 +7,10 @@
 	            <div class="panel panel-default">
 	                <div class="panel-heading" align="center"><font size="4">Actualizacion Datos</font></div>
 	                <div class="panel-body">
-						{!!Form::model($perfil,['route'=>['perfiles.update',$perfil->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
+						{!!Form::model($perfil,['route'=>['perfpag.update',$perfil->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
 							{{ csrf_field() }}
 
-							@include('perfiles.forms.perf_ed')
+							@include('perf_pag.forms.perf_pag_ed')
 
 							<div class="form-group">
 						        <div class="col-md-6 col-md-offset-4">
@@ -25,8 +25,4 @@
 	        </div>
 	    </div>
 	</div>
-
-		{!!Form::open(['route'=>['perfiles.destroy', $perfil->id], 'method'=>'DELETE', 'align'=>'right'])!!}
-			{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
-		{!!Form::close()!!}
 @endsection

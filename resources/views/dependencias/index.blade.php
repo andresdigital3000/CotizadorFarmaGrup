@@ -13,6 +13,11 @@
 				<td>
 					{!!link_to_route('dependencias.edit', $title = 'Editar', $parameters = $dependencia->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
+				<td>
+					{!!Form::open(['route'=>['dependencias.destroy', $dependencia->id], 'method'=>'DELETE'])!!}
+						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+					{!!Form::close()!!}
+				</td>
 			</tbody>
 		@endforeach
 	</table>

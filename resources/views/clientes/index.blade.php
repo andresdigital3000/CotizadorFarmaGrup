@@ -18,6 +18,11 @@
 				<td>
 					{!!link_to_route('clientes.edit', $title = 'Editar', $parameters = $cliente->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
+				<td>
+					{!!Form::open(['route'=>['clientes.destroy', $cliente->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+					{!!Form::close()!!}
+				</td>
 			</tbody>
 		@endforeach
 	</table>

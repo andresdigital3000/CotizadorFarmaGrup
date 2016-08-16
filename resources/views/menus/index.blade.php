@@ -13,6 +13,11 @@
 				<td>
 					{!!link_to_route('menus.edit', $title = 'Editar', $parameters = $menu->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
+				<td>
+					{!!Form::open(['route'=>['menus.destroy', $menu->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+					{!!Form::close()!!}
+				</td>
 			</tbody>
 		@endforeach
 	</table>

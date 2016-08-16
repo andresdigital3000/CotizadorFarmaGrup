@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\PaginasCreateRequest;
 use CotizadorAF\Http\Requests\PaginasUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Paginas;
+use CotizadorAF\PerfPagis;
 use Auth;
 use DB;
 use Session;
@@ -118,6 +119,7 @@ class PaginasController extends Controller
     public function destroy($id)
     {
         Paginas::destroy($id);
+        PerfPagis::destroy($id);        
         Session::flash('message','Pagina Eliminada Correctamente');
         return Redirect::to('/paginas');
     }

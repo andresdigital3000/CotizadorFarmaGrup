@@ -5,12 +5,12 @@
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">
 	            <div class="panel panel-default">
-	                <div class="panel-heading" align="center"><font size="4">Registro Empleado</font></div>
+	                <div class="panel-heading" align="center"><font size="4">Nueva Cotizacion</font></div>
 	                <div class="panel-body">
-	                	{!!Form::open(['route'=>'usuario.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}	 
+	                	{!!Form::open(['route'=>'cotizaciones.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}	 
 	                        {{ csrf_field() }}
 
-	                        @include('usuario.forms.usr')
+	                        @include('cotizaciones.forms.cot')
 
 	                        <div class="form-group">
 	                            <div class="col-md-6 col-md-offset-4">

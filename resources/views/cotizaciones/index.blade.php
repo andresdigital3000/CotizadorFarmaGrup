@@ -9,14 +9,19 @@
 			<th>Correo</th>
 			<th>Operacion</th>
 		</thead>
-		@foreach($users as $user)
+		@foreach($cotis as $cotizacion)
 			<tbody>
-				<td>{{$user->nombre}}</td>
-				<td>{{$user->cargo}}</td>
-				<td>{{$user->extension}}</td>
-				<td>{{$user->email}}</td>
+				<td>{{$cotizacion->nombre}}</td>
+				<td>{{$cotizacion->cargo}}</td>
+				<td>{{$cotizacion->extension}}</td>
+				<td>{{$cotizacion->email}}</td>
 				<td>
-					{!!link_to_route('usuario.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+					{!!link_to_route('cotizaciones.edit', $title = 'Editar', $parameters = $cotizacion->id, $attributes = ['class'=>'btn btn-primary'])!!}
+				</td>
+				<td>
+					{!!Form::open(['route'=>['cotizaciones.destroy', $cotizacion->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
+					{!!Form::close()!!}
 				</td>
 			</tbody>
 		@endforeach

@@ -29,8 +29,8 @@ class CotizacionesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $cotizaciones = Cotizaciones::All();
-        return view('cotizaciones.index',compact('cotizaciones','menus'));
+        $cotis = Cotizaciones::All();
+        return view('cotizaciones.index',compact('cotis','menus'));
     }
 
     /**

@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\PerfilesCreateRequest;
 use CotizadorAF\Http\Requests\PerfilesUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Perfiles;
+use CotizadorAF\PerfPagis;
 use CotizadorAF\Paginas;
 use Auth;
 use DB;
@@ -67,7 +68,6 @@ class PerfilesController extends Controller
         Perfiles::create($request->all()); 
         $perf=DB::table('perfiles')->where('nomperfil',$request['nomperfil'])->first(); 
         $paginas=Paginas::All();  
-        //Session::flash('message','Perfil Creada Correctamente');
         return view('perf_pag.index',compact('perf','menus','paginas'));
     }
 
@@ -126,6 +126,7 @@ class PerfilesController extends Controller
     public function destroy($id)
     {
         Perfiles::destroy($id);
+        PerfPagis::destroy($id);
         Session::flash('message','Perfil Eliminada Correctamente');
         return Redirect::to('/perfiles');
     }
