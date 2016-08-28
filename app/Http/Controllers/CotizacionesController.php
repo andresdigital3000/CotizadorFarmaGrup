@@ -29,7 +29,7 @@ class CotizacionesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $cotis = Cotizaciones::All();
+        $cotis = Cotizaciones::paginate(5);
         return view('cotizaciones.index',compact('cotis','menus'));
     }
 

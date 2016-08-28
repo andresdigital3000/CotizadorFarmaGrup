@@ -22,4 +22,6 @@
 		@endforeach
 	</table>
 
+	{!!$menus->render()!!}
+
 	@endsection

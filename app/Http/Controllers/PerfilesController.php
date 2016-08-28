@@ -31,7 +31,7 @@ class PerfilesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $perfiles = Perfiles::All();
+        $perfiles = Perfiles::paginate(5);
         return view('perfiles.index',compact('perfiles','menus'));
     }
 
@@ -67,7 +67,7 @@ class PerfilesController extends Controller
             ->get();
         Perfiles::create($request->all()); 
         $perf=DB::table('perfiles')->where('nomperfil',$request['nomperfil'])->first(); 
-        $paginas=Paginas::All();  
+        $paginas=Paginas::paginates(5);  
         return view('perf_pag.index',compact('perf','menus','paginas'));
     }
 

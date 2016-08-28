@@ -30,7 +30,7 @@ class PaginasController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $paginas = Paginas::All();
+        $paginas = Paginas::paginate(5);
         return view('paginas.index',compact('paginas','menus'));
     }
 

@@ -36,6 +36,9 @@ function comprobar(obj){
 				</tbody>
 			@endforeach			
 		</table>
+
+		{!!$paginas->render()!!}
+
 		{{ Form::text('id_perf', $perf->id,['style'=>'display:none']) }}
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-4">

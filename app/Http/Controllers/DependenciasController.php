@@ -29,7 +29,7 @@ class DependenciasController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $dependencias = Dependencias::All();
+        $dependencias = Dependencias::paginate(5);
         return view('dependencias.index',compact('dependencias','menus'));
     }
 

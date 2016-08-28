@@ -27,4 +27,6 @@
 		@endforeach
 	</table>
 
+	{!!$cotis->render()!!}
+
 	@endsection

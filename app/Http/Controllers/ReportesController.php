@@ -29,7 +29,7 @@ class ReportesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $reportes = Reportes::All();
+        $reportes = Reportes::paginate(5);
         return view('reportes.index',compact('reportes','menus'));
     }
 

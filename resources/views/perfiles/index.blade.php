@@ -24,4 +24,6 @@
 		@endforeach
 	</table>
 
+	{!!$perfiles->render()!!}
+
 	@endsection

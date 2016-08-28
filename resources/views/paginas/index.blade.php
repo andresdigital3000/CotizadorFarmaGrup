@@ -3,13 +3,11 @@
 	@section('content')
 	<table class="table">
 		<thead>
-			<th>Codigo</th>
 			<th>Nombre</th>
 			<th>Url</th>
 		</thead>
 		@foreach($paginas as $pagina)
 			<tbody>
-				<td>{{$pagina->id}}</td>
 				<td>{{$pagina->nom_pagina}}</td>				
 				<td>{{$pagina->url}}</td>
 				<td>
@@ -23,5 +21,7 @@
 			</tbody>
 		@endforeach
 	</table>
+
+	{!!$paginas->render()!!}
 
 	@endsection

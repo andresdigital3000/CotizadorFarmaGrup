@@ -29,7 +29,7 @@ class ProveedoresController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $proveedores = Proveedores::All();
+        $proveedores = Proveedores::paginate(5);
         return view('proveedores.index',compact('proveedores','menus'));
     }
 
@@ -87,8 +87,8 @@ class ProveedoresController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $proveedor=Proveedores::find($id);        
-        return view('proveedores.editar',compact('proveedor','menus'));
+        $prov=Proveedores::find($id);        
+        return view('proveedores.editar',compact('prov','menus'));
     }
 
     /**

@@ -29,7 +29,7 @@ class ProductosController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $productos = Productos::All();
+        $productos = Productos::paginate(5);
         return view('productos.index',compact('productos','menus'));
     }
 

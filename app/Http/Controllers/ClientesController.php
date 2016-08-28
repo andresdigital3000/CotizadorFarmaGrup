@@ -29,7 +29,7 @@ class ClientesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $clientes = Clientes::All();
+        $clientes = Clientes::paginate(5);
         return view('clientes.index',compact('clientes','menus'));
     }
 
@@ -46,7 +46,8 @@ class ClientesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        return view('clientes.create',compact('menus'));
+        $datosEmp = DB::table('users')->lists('nombre','id');
+        return view('clientes.create',compact('menus','datosEmp'));
     }
 
     /**
@@ -58,7 +59,7 @@ class ClientesController extends Controller
     public function store(ClientesCreateRequest $request)
     {
         Clientes::create($request->all());
-        Session::flash('message','Cliente Creado Correctamente');
+        Session::flash('message','Cliente Agregado Correctamente');
         return Redirect::to('/clientes');
     }
 
@@ -87,8 +88,9 @@ class ClientesController extends Controller
             ->join('menus','paginas.cod_menu','=', 'menus.id')
             ->select('nom_pagina', 'url')
             ->get();
-        $cliente=Clientes::find($id);        
-        return view('clientes.editar',compact('cliente','menus'));
+        $cliente=Clientes::find($id);
+        $datosEmp = DB::table('users')->lists('nombre','id');        
+        return view('clientes.editar',compact('cliente','menus','datosEmp'));
     }
 
     /**

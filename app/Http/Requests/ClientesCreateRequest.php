@@ -24,7 +24,13 @@ class ClientesCreateRequest extends Request
     public function rules()
     {
         return [
-            //
+            'nit'=> 'required',
+            'razonsocial'=> 'required',
+            'ubccion'=> 'required',
+            'ciudad'=> 'required',
+            'pais'=> 'required',
+            'telfno'=> 'required',
+            'respnsbleamfar'=> 'required',
         ];
     }
 }

@@ -3,28 +3,31 @@
 	@section('content')
 	<table class="table">
 		<thead>
-			<th>Nombre</th>
-			<th>Cargo</th>
-			<th>Extension</th>
+			<th>Nit</th>
+			<th>Razon Social</th>
+			<th>Pais</th>
 			<th>Correo</th>
-			<th>Operacion</th>
+			<th>Moneda</th>
 		</thead>
-		@foreach($users as $user)
+		@foreach($proveedores as $proveedor)
 			<tbody>
-				<td>{{$user->nombre}}</td>
-				<td>{{$user->cargo}}</td>
-				<td>{{$user->extension}}</td>
-				<td>{{$user->email}}</td>
+				<td>{{$proveedor->nit}}</td>
+				<td>{{$proveedor->razonsocial}}</td>
+				<td>{{$proveedor->pais}}</td>
+				<td>{{$proveedor->email}}</td>
+				<td>{{$proveedor->moneda}}</td>
 				<td>
-					{!!link_to_route('usuario.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
+					{!!link_to_route('proveedores.edit', $title = 'Editar', $parameters = $proveedor->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
 				<td>
-					{!!Form::open(['route'=>['usuario.destroy', $user->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+					{!!Form::open(['route'=>['proveedores.destroy', $proveedor->id], 'method'=>'DELETE', 'align'=>'right'])!!}
 						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
 					{!!Form::close()!!}
 				</td>
 			</tbody>
 		@endforeach
 	</table>
+
+	{!!$proveedores->render()!!}
 
 	@endsection

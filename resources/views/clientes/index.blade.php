@@ -3,18 +3,17 @@
 	@section('content')
 	<table class="table">
 		<thead>
-			<th>Nombre</th>
-			<th>Cargo</th>
-			<th>Extension</th>
-			<th>Correo</th>
-			<th>Operacion</th>
+			<th>Nit</th>
+			<th>Razon Social</th>
+			<th>Pais</th>
+			<th>Responsable</th>
 		</thead>
 		@foreach($clientes as $cliente)
 			<tbody>
-				<td>{{$cliente->nombre}}</td>
-				<td>{{$cliente->cargo}}</td>
-				<td>{{$cliente->extension}}</td>
-				<td>{{$cliente->email}}</td>
+				<td>{{$cliente->nit}}</td>
+				<td>{{$cliente->razonsocial}}</td>
+				<td>{{$cliente->pais}}</td>
+				<td>{{$cliente->respnsbleamfar}}</td>
 				<td>
 					{!!link_to_route('clientes.edit', $title = 'Editar', $parameters = $cliente->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
@@ -26,5 +25,7 @@
 			</tbody>
 		@endforeach
 	</table>
+
+	{!!$clientes->render()!!}
 
 	@endsection

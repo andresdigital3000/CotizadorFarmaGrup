@@ -37,7 +37,7 @@ class UsuarioController extends Controller
             ->select('nom_pagina', 'url')
             ->get();
 
-        $users = User::All();
+        $users = User::paginate(5);
 
         return view('usuario.index',compact('users','menus'));
     }
