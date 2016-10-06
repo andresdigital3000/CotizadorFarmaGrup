@@ -8,7 +8,7 @@ use CotizadorAF\Http\Requests\PaginasCreateRequest;
 use CotizadorAF\Http\Requests\PaginasUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Paginas;
-use CotizadorAF\PerfPagis;
+use CotizadorAF\Perf_Pagi;
 use Auth;
 use DB;
 use Session;
@@ -24,14 +24,8 @@ class PaginasController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $paginas = Paginas::paginate(5);
-        return view('paginas.index',compact('paginas','menus'));
+        $paginas = Paginas::paginate(10);
+        return view('paginas.index',compact('paginas'));
     }
 
     /**
@@ -41,14 +35,8 @@ class PaginasController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $cod_menu = DB::table('menus')->lists('nom_menu','id');
-        return view('paginas.create',compact('cod_menu','menus'));
+        return view('paginas.create',compact('cod_menu'));
     }
 
     /**
@@ -83,14 +71,8 @@ class PaginasController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $pagina=Paginas::find($id);        
-        return view('paginas.editar',compact('pagina','menus'));
+        return view('paginas.editar',compact('pagina'));
     }
 
     /**
@@ -119,7 +101,7 @@ class PaginasController extends Controller
     public function destroy($id)
     {
         Paginas::destroy($id);
-        PerfPagis::destroy($id);        
+        Perf_Pagi::where('cod_pagina', $id)->delete();        
         Session::flash('message','Pagina Eliminada Correctamente');
         return Redirect::to('/paginas');
     }

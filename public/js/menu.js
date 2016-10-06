@@ -1,0 +1,9 @@
+// $(document).ready(function() {
+// 	$('#page-wrapper').load('usuario/create');
+// });
+
+$('ul#side-menu li ul a').click(function(){
+	var page = $(this).attr('href');
+	$('#page-wrapper').load(page);
+	return false;
+});

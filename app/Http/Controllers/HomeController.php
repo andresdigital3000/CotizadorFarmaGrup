@@ -6,6 +6,8 @@ use CotizadorAF\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use Cache;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -17,6 +19,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -26,13 +29,5 @@ class HomeController extends Controller
      */
     public function index(){
 
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-
-        return view('home',compact('menus'));
     }
 }

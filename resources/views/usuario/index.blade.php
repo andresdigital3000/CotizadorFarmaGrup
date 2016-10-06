@@ -1,4 +1,4 @@
-@extends('layouts.master',['menus' => $menus])
+@extends('layouts.master')
 	@include('alerts.success')
 	@section('content')
 	<table class="table">
@@ -7,6 +7,8 @@
 			<th>Cargo</th>
 			<th>Extension</th>
 			<th>Correo</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
 		</thead>
 		@foreach($users as $user)
 			<tbody>

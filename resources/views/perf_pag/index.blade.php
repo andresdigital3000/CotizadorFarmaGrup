@@ -12,7 +12,7 @@ function comprobar(obj){
 	}
 </script>
 
-@extends('layouts.master',['menus' => $menus])
+@extends('layouts.master')
 @include('alerts.success')
 @section('content')
 	{!!Form::open(['route'=>'perfpag.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}
@@ -30,9 +30,9 @@ function comprobar(obj){
 				<tbody>					
 					<td>{{$pagina->id}}</td>
 					<td>{{$pagina->nom_pagina}}</td>
-					<td>{{ Form::checkbox('ver[]',$pagina->id,null,['onChange'=>'comprobar(this);']) }}</td>
-					<td>{{ Form::checkbox('act[]',$pagina->id,null,['disabled', 'id'=>'act'.$pagina->id]) }}</td>
-					<td>{{ Form::checkbox('eli[]',$pagina->id,null,['disabled', 'id'=>'eli'.$pagina->id]) }}</td>
+					<td>{{Form::checkbox('ver[]',$pagina->id,null,['onChange'=>'comprobar(this);']) }}</td>
+					<td>{{Form::checkbox('act[]',$pagina->id,null,['disabled', 'id'=>'act'.$pagina->id]) }}</td>
+					<td>{{Form::checkbox('eli[]',$pagina->id,null,['disabled', 'id'=>'eli'.$pagina->id]) }}</td>
 				</tbody>
 			@endforeach			
 		</table>

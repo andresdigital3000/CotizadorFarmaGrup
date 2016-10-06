@@ -8,12 +8,13 @@ use CotizadorAF\Http\Requests\PerfilesCreateRequest;
 use CotizadorAF\Http\Requests\PerfilesUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Perfiles;
-use CotizadorAF\PerfPagis;
+use CotizadorAF\Perf_Pagi;
 use CotizadorAF\Paginas;
 use Auth;
 use DB;
 use Session;
 use Redirect;
+use Subquery;
 use Illuminate\Routing\Route;
 
 class PerfilesController extends Controller
@@ -25,14 +26,8 @@ class PerfilesController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $perfiles = Perfiles::paginate(5);
-        return view('perfiles.index',compact('perfiles','menus'));
+        $perfiles = Perfiles::paginate(10);
+        return view('perfiles.index',compact('perfiles'));
     }
 
     /**
@@ -42,13 +37,7 @@ class PerfilesController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        return view('perfiles.create',compact('menus'));
+        return view('perfiles.create');
     }
 
     /**
@@ -59,16 +48,11 @@ class PerfilesController extends Controller
      */
     public function store(PerfilesCreateRequest $request)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
+
         Perfiles::create($request->all()); 
         $perf=DB::table('perfiles')->where('nomperfil',$request['nomperfil'])->first(); 
-        $paginas=Paginas::paginates(5);  
-        return view('perf_pag.index',compact('perf','menus','paginas'));
+        $paginas=Paginas::paginate(10);  
+        return view('perf_pag.index',compact('perf','paginas'));
     }
 
     /**
@@ -90,14 +74,8 @@ class PerfilesController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $perfil=Perfiles::find($id);        
-        return view('perfiles.editar',compact('perfil','menus'));
+        return view('perfiles.editar',compact('perfil'));
     }
 
     /**
@@ -112,9 +90,24 @@ class PerfilesController extends Controller
         $perfil=Perfiles::find($id);
         $perfil->fill($request->all());
         $perfil->save();
+
+        $checkVer = DB::table('perf__pagis as pp')
+                ->selectRaw('count(pp.id)')->whereRaw('pp.cod_perf = '.$perfil->id.' and pp.cod_pagina=paginas.id and pp.ver = 1');
+
+        $checkAct = DB::table('perf__pagis as pp')
+                ->selectRaw('count(pp.id)')->whereRaw('pp.cod_perf = '.$perfil->id.' and pp.cod_pagina=paginas.id and pp.actualizar = 1');
+
+        $checkEli = DB::table('perf__pagis as pp')
+                ->selectRaw('count(pp.id)')->whereRaw('pp.cod_perf = '.$perfil->id.' and pp.cod_pagina=paginas.id and pp.eliminar = 1');
+
+        $perf=DB::table('perfiles')->where('id',$perfil->id)->first(); 
+
+        $paginas=Paginas::from('paginas')
+                ->select('*',DB::raw('('.$checkVer->toSql().') as sCheckVer'),DB::raw('('.$checkAct->toSql().') as sCheckAct'),DB::raw('('.$checkEli->toSql().') as sCheckEli'))
+                ->paginate(10);  
         
-        Session::flash('message','Perfil Actualizada Correctamente');
-        return Redirect::to('/perfiles');
+        return view('perf_pag.indexEdit',compact('perf','paginas'));
+
     }
 
     /**
@@ -125,9 +118,9 @@ class PerfilesController extends Controller
      */
     public function destroy($id)
     {
+        Perf_Pagi::where('cod_perf',$id)->delete();
         Perfiles::destroy($id);
-        PerfPagis::destroy($id);
-        Session::flash('message','Perfil Eliminada Correctamente');
+        Session::flash('message','Perfil Eliminado Correctamente');
         return Redirect::to('/perfiles');
     }
 }

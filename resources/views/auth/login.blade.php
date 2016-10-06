@@ -18,7 +18,7 @@
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>El campo Usuario es obligatorio</strong>
                                     </span>
                                 @endif
                             </div>
@@ -32,7 +32,7 @@
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>El campo Contraseña es obligatorio</strong>
                                     </span>
                                 @endif
                             </div>
@@ -53,8 +53,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i> Ingresar
                                 </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Olvido su Contraseña?</a>
                             </div>
                         </div>
                     </form>

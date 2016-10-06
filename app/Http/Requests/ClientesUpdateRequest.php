@@ -13,7 +13,7 @@ class ClientesUpdateRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class ClientesUpdateRequest extends Request
     public function rules()
     {
         return [
-            //
+            'nit'=> 'required',
+            'razonsocial'=> 'required',
+            'ubccion'=> 'required',
+            'ciudad'=> 'required',
+            'pais'=> 'required',
+            'telfno'=> 'required',
+            'respnsbleamfar'=> 'required',
         ];
     }
 }

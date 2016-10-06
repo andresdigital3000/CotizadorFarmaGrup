@@ -23,14 +23,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $clientes = Clientes::paginate(5);
-        return view('clientes.index',compact('clientes','menus'));
+        $clientes = Clientes::paginate(10);
+        return view('clientes.index',compact('clientes'));
     }
 
     /**
@@ -40,14 +34,8 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $datosEmp = DB::table('users')->lists('nombre','id');
-        return view('clientes.create',compact('menus','datosEmp'));
+        return view('clientes.create',compact('datosEmp'));
     }
 
     /**
@@ -82,15 +70,9 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $cliente=Clientes::find($id);
         $datosEmp = DB::table('users')->lists('nombre','id');        
-        return view('clientes.editar',compact('cliente','menus','datosEmp'));
+        return view('clientes.editar',compact('cliente','datosEmp'));
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.master',['menus' => $menus])
+@extends('layouts.master')
 	@include('alerts.success')
 	@section('content')
 	<table class="table">
@@ -8,6 +8,8 @@
 			<th>Pais</th>
 			<th>Correo</th>
 			<th>Moneda</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
 		</thead>
 		@foreach($proveedores as $proveedor)
 			<tbody>

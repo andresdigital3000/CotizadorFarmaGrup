@@ -1,6 +1,5 @@
-@extends('layouts.master',['menus' => $menus])
+@extends('layouts.master')
 @section('content')
-@include('alerts.request')
 	<div>
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">

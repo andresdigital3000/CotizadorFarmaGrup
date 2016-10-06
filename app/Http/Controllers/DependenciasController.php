@@ -23,14 +23,8 @@ class DependenciasController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $dependencias = Dependencias::paginate(5);
-        return view('dependencias.index',compact('dependencias','menus'));
+        return view('dependencias.index',compact('dependencias'));
     }
 
     /**
@@ -40,13 +34,7 @@ class DependenciasController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        return view('dependencias.create',compact('menus'));
+        return view('dependencias.create');
     }
 
     /**
@@ -81,14 +69,8 @@ class DependenciasController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $dependencia=Dependencias::find($id);        
-        return view('dependencias.editar',compact('dependencia','menus'));
+        return view('dependencias.editar',compact('dependencia'));
     }
 
     /**

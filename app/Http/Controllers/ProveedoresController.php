@@ -7,7 +7,7 @@ use CotizadorAF\Http\Requests;
 use CotizadorAF\Http\Requests\ProveedoresCreateRequest;
 use CotizadorAF\Http\Requests\ProveedoresUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
-use CotizadorAF\Proveedores;
+use CotizadorAF\Proveedor;
 use Auth;
 use DB;
 use Session;
@@ -23,14 +23,8 @@ class ProveedoresController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $proveedores = Proveedores::paginate(5);
-        return view('proveedores.index',compact('proveedores','menus'));
+        $proveedores = Proveedor::paginate(10);
+        return view('proveedores.index',compact('proveedores'));
     }
 
     /**
@@ -40,13 +34,7 @@ class ProveedoresController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        return view('proveedores.create',compact('menus'));
+        return view('proveedores.create');
     }
 
     /**
@@ -57,7 +45,7 @@ class ProveedoresController extends Controller
      */
     public function store(ProveedoresCreateRequest $request)
     {
-        Proveedores::create($request->all());
+        Proveedor::create($request->all());
         Session::flash('message','Proveedor Creado Correctamente');
         return Redirect::to('/proveedores');
     }
@@ -81,14 +69,8 @@ class ProveedoresController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $prov=Proveedores::find($id);        
-        return view('proveedores.editar',compact('prov','menus'));
+        $prov=Proveedor::find($id);        
+        return view('proveedores.editar',compact('prov'));
     }
 
     /**
@@ -100,7 +82,7 @@ class ProveedoresController extends Controller
      */
     public function update(ProveedoresUpdateRequest $request, $id)
     {
-        $proveedor=Proveedores::find($id);
+        $proveedor=Proveedor::find($id);
         $proveedor->fill($request->all());
         $proveedor->save();
         
@@ -116,7 +98,7 @@ class ProveedoresController extends Controller
      */
     public function destroy($id)
     {
-        Proveedores::destroy($id);
+        Proveedor::destroy($id);
         Session::flash('message','Proveedor Elimiado Correctamente');
         return Redirect::to('/proveedores');
     }

@@ -155,8 +155,10 @@ return [
         CotizadorAF\Providers\AuthServiceProvider::class,
         CotizadorAF\Providers\EventServiceProvider::class,
         CotizadorAF\Providers\RouteServiceProvider::class,
+        CotizadorAF\Providers\ComposerServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
+
 
     ],
 

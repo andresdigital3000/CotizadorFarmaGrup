@@ -5,7 +5,9 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 use DB; 
+use Cache;
 
 trait AuthenticatesUsers
 {
@@ -116,12 +118,21 @@ trait AuthenticatesUsers
             return $this->authenticated($request, Auth::guard($this->getGuard())->user());
         }
 
+        Log::info('En handleUserWasAuthenticated del AuthenticatesUsers');
         $menus = DB::table('paginas')
             ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
             ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
+            ->join('menus','paginas.cod_menu','=','menus.id')
+            ->orderBy('orden','asc','orden_pag','asc')
+            ->select('nom_menu','nom_pagina','url','menus.id')
             ->get();
+
+        Log::info('En handleUserWasAuthenticated del AuthenticatesUsers - Perfil = '.Auth::user()->cod_perfil);
+        Cache::flush();
+
+        $var = 'menus'.Auth::user()->id;
+        Log::info('En handleUserWasAuthenticated del AuthenticatesUsers - $var = '.$var);
+        Cache::put($var, $menus, 60);
         return view('home',compact('menus'));
     }
 
@@ -149,7 +160,7 @@ trait AuthenticatesUsers
     {
         return Lang::has('auth.failed')
                 ? Lang::get('auth.failed')
-                : 'Estas credenciales no coinciden con nuestros registros.';
+                : 'El usuario o password son incorrectos.';
     }
 
     /**

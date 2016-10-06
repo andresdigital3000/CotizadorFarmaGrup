@@ -2,17 +2,20 @@
 
 namespace CotizadorAF\Http\Controllers;
 
+use DB;
+use Auth;
+use Cache;
+use Session;
+use Redirect;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Routing\Route;
 use Illuminate\Http\Request;
 use CotizadorAF\Http\Requests;
 use CotizadorAF\Http\Requests\UserCreateRequest;
 use CotizadorAF\Http\Requests\UserUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\User;
-use Auth;
-use DB;
-use Session;
-use Redirect;
-use Illuminate\Routing\Route;
+
 class UsuarioController extends Controller
 {
     public function __construct(){
@@ -30,16 +33,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-
         $users = User::paginate(5);
-
-        return view('usuario.index',compact('users','menus'));
+        return view('usuario.index',compact('users'));
     }
 
     /**
@@ -49,17 +44,11 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-
+        Log::info('UsuarioController - create');
         $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
         $datosDep = DB::table('dependencias')->lists('dependencia','id');
 
-        return view('usuario.create',compact('datosPerf','datosDep','menus'));
+        return view('usuario.create',compact('datosPerf','datosDep'));
     }
 
     /**
@@ -94,17 +83,10 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-
         $user=User::find($id);        
         $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
         $datosDep = DB::table('dependencias')->lists('dependencia','id');
-        return view('usuario.editar',compact('user','datosPerf','datosDep','menus'));
+        return view('usuario.editar',compact('user','datosPerf','datosDep'));
     }
 
     /**

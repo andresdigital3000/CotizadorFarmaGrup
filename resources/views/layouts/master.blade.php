@@ -55,10 +55,20 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 
+                        <?php $temp_menu = 0; ?>
                         @foreach($menus as $menu)
-                            <li>
-                                <a href="<?php echo url($menu->url)?>"> {{$menu->nom_pagina}}</a>
-                            </li>
+                            @if (($temp_menu != $menu->id) and ($temp_menu !=0)) 
+                                </li>
+                            @endif
+                            @if ($temp_menu != $menu->id)
+                                <li>
+                                    <a href="#"> {{$menu->nom_menu}}</a>
+
+                                    <ul><a href="<?php echo url($menu->url)?>"> {{$menu->nom_pagina}} </a></ul>
+                            @else
+                                    <ul><a href="<?php echo url($menu->url)?>"> {{$menu->nom_pagina}} </a></ul>
+                            @endif
+                            <?php $temp_menu = $menu->id; ?>
                         @endforeach
 
                     </ul>
