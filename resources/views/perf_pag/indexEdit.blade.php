@@ -33,7 +33,7 @@ function habilitar(){
 @include('alerts.success')
 @section('content')
 	{!!Form::model($perf,['route'=>['perfpag.update',$perf->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
-		{{ csrf_field() }}
+
 		<h1 align="center">Permisos para Perfil {{$perf->nomperfil}}</h1>	 
 		<table id="tblPermisos" class="table">
 			<thead>
@@ -53,8 +53,6 @@ function habilitar(){
 				</tbody>
 			@endforeach			
 		</table>
-
-		{!!$paginas->render()!!}
 
 		{{ Form::text('id_perf', $perf->id,['style'=>'display:none']) }}
 		<div class="form-group">

@@ -34,6 +34,10 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer('proveedores.create','CotizadorAF\Http\ViewComposers\MenuComposer');
         view()->composer('proveedores.index','CotizadorAF\Http\ViewComposers\MenuComposer');
         view()->composer('proveedores.editar','CotizadorAF\Http\ViewComposers\MenuComposer');
+        view()->composer('productos.create','CotizadorAF\Http\ViewComposers\MenuComposer');
+        view()->composer('productos.index','CotizadorAF\Http\ViewComposers\MenuComposer');
+        view()->composer('productos.editar','CotizadorAF\Http\ViewComposers\MenuComposer');
+        view()->composer('productos.plantillas','CotizadorAF\Http\ViewComposers\MenuComposer');
     }
 
     /**

@@ -1,0 +1,84 @@
+[33mcommit 5ba5522fb3d35f9d64553777604c7a8cbecbc7a0[m
+Author: Cesar Peña <cesar.pena@nitolo.com>
+Date:   Thu Oct 6 18:55:35 2016 -0500
+
+    Versión revisada y afinada de lo que entregó Oscar
+
+[33mcommit 8a62989dbe5a06a53b744c6f1629d44d1d9cb60f[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Sun Aug 28 00:20:37 2016 -0500
+
+    Otros Mantenimientos
+
+[33mcommit 3e1381cebdc4c1887c83edd310e8f83bf3bc8616[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Tue Aug 16 07:06:16 2016 -0500
+
+    Avance de Permisos
+
+[33mcommit bdea20931ddba70b5d9f1eb4c1c3470a1f1b9e01[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Fri Jul 29 10:33:05 2016 -0500
+
+    Avance de Permisos
+
+[33mcommit 1696990dbde1edee20ff46f9f9945505bb62a54c[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Thu Jul 21 16:39:09 2016 -0500
+
+    Proyecto de Trabajo Actual - Menu Dinamico 1
+
+[33mcommit 88a1b4f7c263d8831551e3812b76b91f1e2f701d[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Tue Jul 19 16:50:11 2016 -0500
+
+    Subo el Proyecto de Trabajo Actual
+
+[33mcommit b22f67c33fac57d994e1bcc900d0f16203c5e7e1[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Sat Jul 9 19:43:03 2016 -0500
+
+    Desarrollo Login
+
+[33mcommit dcf5a24a2bd5a4b17acd0df08cfa37736161ce45[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Sat Jun 25 21:19:30 2016 -0500
+
+    Creacion de las Nuevas Tablas
+
+[33mcommit 2302db40e9177121a293726d4e6552cf7dcb62fd[m
+Author: Oscar Jobany Gomez Ochoa <caballero1094@hotmail.com>
+Date:   Fri May 13 17:53:48 2016 -0500
+
+    Adicion de archivos Eloquent
+
+[33mcommit 498cbc5bbf354714b1a68d0f17d4594ef7660a17[m
+Author: Cesar Peña <cesar.pena@nitolo.com>
+Date:   Sat Apr 30 18:41:01 2016 -0500
+
+    Subir archivo env para Andres
+
+[33mcommit 3fed60a27fb4c20b32dfe89b2518123e562d8997[m
+Merge: d5c40fc 5f32b52
+Author: Cesar Peña <cesar.pena@nitolo.com>
+Date:   Sat Apr 30 18:22:37 2016 -0500
+
+    Merge branch 'master' of https://bitbucket.org/cotizadorfarmagrupteam/cotifarmarepository
+
+[33mcommit d5c40fcb35d7100bbddf97b314673a3e7859ddf2[m
+Author: Cesar Peña <cesar.pena@nitolo.com>
+Date:   Sat Apr 30 18:18:38 2016 -0500
+
+    Subiendo librerias Vendor
+
+[33mcommit 5f32b5218f1aa94df09a318b6fb4b4cad4653928[m
+Author: andresdigital3000 <andresdigital3000@gmail.com>
+Date:   Sat Apr 30 17:52:25 2016 -0500
+
+    Prueba
+
+[33mcommit 84fd63c661deb431380696fe1143ab453607a514[m
+Author: Cesar Peña <cesar.pena@nitolo.com>
+Date:   Sat Apr 30 17:35:48 2016 -0500
+
+    Commit inicial Farmagrup

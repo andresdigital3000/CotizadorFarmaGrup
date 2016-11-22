@@ -7,10 +7,10 @@
 	            <div class="panel panel-default">
 	                <div class="panel-heading" align="center"><font size="4">Actualizacion Datos</font></div>
 	                <div class="panel-body">
-						{!!Form::model($user,['route'=>['usuario.update',$user->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
+						{!!Form::model($prov,['route'=>['proveedores.update',$prov->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form'])!!}
 							{{ csrf_field() }}
 
-							@include('usuario.forms.usr_ed')
+							@include('proveedores.forms.prov_ed')
 
 							<div class="form-group">
 						        <div class="col-md-6 col-md-offset-4">

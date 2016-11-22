@@ -1,24 +1,15 @@
 @extends('layouts.master')
 @section('content')
-@include('alerts.request')
-@include('proveedores.modal')
 	<div>
 	    <div class="row">
 	        <div class="col-md-8 col-md-offset-2">
 	            <div class="panel panel-default">
-	                <div class="panel-heading" align="center"><font size="4">Productos</font></div>
+	                <div class="panel-heading" align="center"><font size="4">Administrar Plantillas</font></div>
 	                <div class="panel-body">
-	                
-						<td>
-							<button class='btn btn-primary' data-toggle='modal' data-target='#searchProveedorModal'>Buscar proveedor</button>
-						</td>	                
-
-						@include('proveedores.forms.prov_ed_pro')
-
-	                	{!!Form::open(['route'=>'productos.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}	 
+	                	{!!Form::model($prod,['route'=>['productos.update',$prod],'method'=>'PUT','class'=>'form-horizontal','files' => true])!!}	 
 	                        {{ csrf_field() }}
 
-							@include('productos.forms.prod') 
+	                        @include('productos.forms.prod_plant')
 
 	                        <div class="form-group">
 	                            <div class="col-md-6 col-md-offset-4">

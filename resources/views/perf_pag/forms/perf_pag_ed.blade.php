@@ -11,7 +11,7 @@
 							<div class="form-group{{ $errors->has('nivel') ? ' has-error' : '' }}">
 								<label for="nivel" class="col-md-4 control-label">Nivel Perfil</label>
 								<div class="col-md-6">
-									<input id="nivel" type="text" class="form-control" name="nivel" value={!!$perfil->nivel!!}>
+									<input id="nivel" type="text" class="form-control" name="nivel" value="{!!$perfil->nivel!!}">
 									@if ($errors->has('nivel'))
 										<span class="help-block"><strong>{{ $errors->first('nivel') }}</strong></span>
 									@endif

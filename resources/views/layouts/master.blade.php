@@ -20,7 +20,7 @@
         
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">            
             <div>
-                <a class="navbar-brand" href="{{ url('/') }}"><img src="imagenes/LogoAmfarGlobo.jpg" width="50px" height="50px">
+                <a class="navbar-brand" href="{{ url('/') }}"><img src="/CotizadorFarma/public/imagenes/LogoAmfarGlobo.jpg" width="38px" height="38px" >
                 </a>
             </div>
             <div class="navbar-header">
@@ -51,7 +51,7 @@
                 </li>
             </ul>
 
-            <div class="navbar-default sidebar" role="navigation">
+            <div class="navbar-default sidebar" role="navigation" >
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 
@@ -87,8 +87,8 @@
     {!!Html::script('js/jquery.min.js')!!}
     {!!Html::script('js/bootstrap.min.js')!!}
     {!!Html::script('js/metisMenu.min.js')!!}
-    {!!Html::script('js/sb-admin-2.js')!!}
-
+    {!!Html::script('js/sb-admin-2.js')!!}    
+    {!!Html::script('js/buscarModal.js')!!}
 </body>
 
 </html>

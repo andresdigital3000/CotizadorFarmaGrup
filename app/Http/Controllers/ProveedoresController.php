@@ -73,6 +73,7 @@ class ProveedoresController extends Controller
         return view('proveedores.editar',compact('prov'));
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -101,5 +102,50 @@ class ProveedoresController extends Controller
         Proveedor::destroy($id);
         Session::flash('message','Proveedor Elimiado Correctamente');
         return Redirect::to('/proveedores');
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     */
+    public function findById(Request $request)
+    {
+        $prov=Proveedor::find($request->codigo);     
+        return response()->json($prov);
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function buscarProveedor(Request $request){
+        
+        $codigo=$request->codigo;
+        $nit=$request->nit;
+        $razonsocial=$request->razonsocial;        
+
+        if ($codigo=='' && $nit=='' && $razonsocial==''){
+            $proveedores = Proveedor::All(); 
+        }else{
+            $query = Proveedor::query();
+            if($codigo!=''){
+                $query = $query->where('id','like', '%'.$codigo.'%');
+            }
+            if($nit!=''){
+                $query = $query->where('nit','=',$nit);
+            }
+            if($razonsocial!=''){
+                $query = $query->where('razonsocial','like', '%'.$razonsocial.'%');
+            }
+            $proveedores = $query->get();
+        }
+
+        if ($proveedores == ''){
+            Session::flash('message-error','No se encontraron proveedores');
+        }
+
+        return response()->json($proveedores);
     }
 }

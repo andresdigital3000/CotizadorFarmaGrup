@@ -121,7 +121,7 @@ class PerfPagisController extends Controller
             // ->get();
             //Perfiles::create($request->all()); 
             $perf=DB::table('perfiles')->where('id',$id)->first(); 
-            $paginas=Paginas::paginate(10);  
+            $paginas=Paginas::paginate(10);              
             return view('perf_pag.index',compact('perf','paginas'));
         }       
     }

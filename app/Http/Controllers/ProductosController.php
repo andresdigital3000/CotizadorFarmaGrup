@@ -8,6 +8,7 @@ use CotizadorAF\Http\Requests\ProductosCreateRequest;
 use CotizadorAF\Http\Requests\ProductosUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
 use CotizadorAF\Productos;
+use CotizadorAF\Proveedor;
 use Auth;
 use DB;
 use Session;
@@ -16,6 +17,9 @@ use Illuminate\Routing\Route;
 
 class ProductosController extends Controller
 {
+    
+    var $cod_tipo_producto = 6;
+
     /**
      * Display a listing of the resource.
      *
@@ -23,14 +27,13 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        $productos = Productos::paginate(5);
-        return view('productos.index',compact('productos','menus'));
+        $productos = DB::table('productos')
+            ->join('deta_parametros','productos.clasfccion','=','deta_parametros.id')
+            ->orderBy('descrpcion','asc')
+            ->select('referencia','descrpcion','deta_parametro','precio_dolar','precio_euro','productos.id')
+            ->paginate(10);
+
+        return view('productos.index',compact('productos'));
     }
 
     /**
@@ -40,13 +43,13 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
-        return view('productos.create',compact('menus'));
+
+        $tipo_producto = DB::table('deta_parametros')
+                   -> where('deta_parametros.cod_parametro','=',$this->cod_tipo_producto)
+                   -> lists('deta_parametro','id');
+
+
+        return view('productos.create', compact('tipo_producto'));
     }
 
     /**
@@ -60,6 +63,7 @@ class ProductosController extends Controller
         Productos::create($request->all());
         Session::flash('message','Producto Creado Correctamente');
         return Redirect::to('/productos');
+        //return ($request->all());
     }
 
     /**
@@ -81,14 +85,28 @@ class ProductosController extends Controller
      */
     public function edit($id)
     {
-        $menus = DB::table('paginas')
-            ->join('perf__pagis','paginas.id','=','perf__pagis.cod_pagina')
-            ->where('cod_perf', Auth::user()->cod_perfil)
-            ->join('menus','paginas.cod_menu','=', 'menus.id')
-            ->select('nom_pagina', 'url')
-            ->get();
         $producto=Productos::find($id);        
-        return view('productos.editar',compact('producto','menus'));
+
+        $prov=Proveedor::find($producto->codgo_prov);        
+
+        $tipo_producto = DB::table('deta_parametros')
+                   -> where('deta_parametros.cod_parametro','=',$this->cod_tipo_producto)
+                   -> lists('deta_parametro','id');
+
+        return view('productos.editar',compact('producto','tipo_producto','prov'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function plantillaEdit($id)
+    {
+        $prod=Productos::find($id);        
+
+        return view('productos.plantillas',compact('prod'));
     }
 
     /**
@@ -103,7 +121,10 @@ class ProductosController extends Controller
         $producto=Productos::find($id);
         $producto->fill($request->all());
         $producto->save();
-        
+
+        $directorio="\Farma"."\Prueba.jpg";
+        \Storage::disk('farma')->put($directorio, \File::get($request->plantlla_vtaplaza));
+
         Session::flash('message','Producto Actualizado Correctamente');
         return Redirect::to('/productos');
     }

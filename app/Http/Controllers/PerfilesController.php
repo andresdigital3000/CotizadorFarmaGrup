@@ -104,7 +104,7 @@ class PerfilesController extends Controller
 
         $paginas=Paginas::from('paginas')
                 ->select('*',DB::raw('('.$checkVer->toSql().') as sCheckVer'),DB::raw('('.$checkAct->toSql().') as sCheckAct'),DB::raw('('.$checkEli->toSql().') as sCheckEli'))
-                ->paginate(10);  
+                ->get();  
         
         return view('perf_pag.indexEdit',compact('perf','paginas'));
 

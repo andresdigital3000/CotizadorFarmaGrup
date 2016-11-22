@@ -46,8 +46,12 @@ class ClientesController extends Controller
      */
     public function store(ClientesCreateRequest $request)
     {
-        Clientes::create($request->all());
-        Session::flash('message','Cliente Agregado Correctamente');
+        try{
+            Clientes::create($request->all());
+            Session::flash('message','Cliente Agregado Correctamente');
+        }catch (\Illuminate\Database\QueryException $e){
+            Session::flash('message-error','No se creó el cliente, Nit ya existe!');
+        }
         return Redirect::to('/clientes');
     }
 
