@@ -16,6 +16,8 @@ use Illuminate\Routing\Route;
 
 class ProveedoresController extends Controller
 {
+
+    var $codigo_moneda = 7;
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +36,11 @@ class ProveedoresController extends Controller
      */
     public function create()
     {
-        return view('proveedores.create');
+        $monedas = DB::table('deta_parametros')
+                   -> where('deta_parametros.cod_parametro','=',$this->codigo_moneda)
+                   -> lists('deta_parametro','deta_parametro');
+
+        return view('proveedores.create',compact('monedas'));
     }
 
     /**
@@ -45,7 +51,13 @@ class ProveedoresController extends Controller
      */
     public function store(ProveedoresCreateRequest $request)
     {
-        Proveedor::create($request->all());
+        $prov = new Proveedor();
+        $prov->fill($request->all());
+        $prov->save();
+
+        $prov->codigo = 'DOCGC'.str_pad($prov->id, 4, "0", STR_PAD_LEFT);
+        $prov->save();
+
         Session::flash('message','Proveedor Creado Correctamente');
         return Redirect::to('/proveedores');
     }
@@ -58,7 +70,8 @@ class ProveedoresController extends Controller
      */
     public function show($id)
     {
-        //
+        $prov=Proveedor::find($id);        
+        return view('proveedores.view',compact('prov'));
     }
 
     /**
@@ -69,8 +82,12 @@ class ProveedoresController extends Controller
      */
     public function edit($id)
     {
+        $monedas = DB::table('deta_parametros')
+                   -> where('deta_parametros.cod_parametro','=',$this->codigo_moneda)
+                   -> lists('deta_parametro','deta_parametro');
+
         $prov=Proveedor::find($id);        
-        return view('proveedores.editar',compact('prov'));
+        return view('proveedores.editar',compact('prov','monedas'));
     }
 
 
@@ -86,7 +103,6 @@ class ProveedoresController extends Controller
         $proveedor=Proveedor::find($id);
         $proveedor->fill($request->all());
         $proveedor->save();
-        
         Session::flash('message','Proveedor Actuaizado Correctamente');
         return Redirect::to('/proveedores');
     }

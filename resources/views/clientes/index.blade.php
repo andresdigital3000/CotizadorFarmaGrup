@@ -22,7 +22,7 @@
 					{!!link_to_route('clientes.edit', $title = 'Editar', $parameters = $cliente->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
 				<td style="text-align:center">
-					{!!link_to_route('clientes.edit', $title = 'Ver', $parameters = $cliente->id, $attributes = ['class'=>'btn btn-primary'])!!}
+					{!!link_to_route('clientes.show', $title = 'Ver', $parameters = $cliente->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
 				<td style="text-align:center">
 					{!!Form::open(['route'=>['clientes.destroy', $cliente->id], 'method'=>'DELETE', 'align'=>'rigth'])!!}

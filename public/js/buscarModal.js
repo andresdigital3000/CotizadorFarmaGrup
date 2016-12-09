@@ -4,7 +4,7 @@ $("#buscar").click(function(){
 	var nit = $("#nit_m").val();
 	var razonsocial = $("#razonsocial_m").val();
 	var params = 'codigo='+id+'&nit='+nit+'&razonsocial='+razonsocial;
-	var route = "http://localhost:8080/CotizadorFarma/public/buscarProv";
+	var route = window.location.origin+"/CotizadorFarma/public/buscarProv";
 	var tablaRegistros = $("#registros");
 	var tablaTr = $("#registros tr");
 	tablaTr.remove();
@@ -27,7 +27,7 @@ $("#buscar").click(function(){
 
 function Elegir(btn){
 
-	var route = "http://localhost:8080/CotizadorFarma/public/findById";
+	var route = window.location.origin+"/CotizadorFarma/public/findById";
 	var params = 'codigo='+btn.value; 
 
 	$.get(route, params, function(res){	
