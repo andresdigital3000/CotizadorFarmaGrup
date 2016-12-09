@@ -7,9 +7,10 @@ use CotizadorAF\Http\Requests;
 use CotizadorAF\Http\Requests\ClientesCreateRequest;
 use CotizadorAF\Http\Requests\ClientesUpdateRequest;
 use CotizadorAF\Http\Controllers\Controller;
+use CotizadorAF\User;
 use CotizadorAF\Clientes;
-use Auth;
 use DB;
+use Auth;
 use Session;
 use Redirect;
 use Illuminate\Routing\Route;
@@ -63,7 +64,9 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente=Clientes::find($id);
+        $datosEmp=User::where('id',$cliente->respnsbleamfar)->first();                
+        return view('clientes.view',compact('cliente','datosEmp'));
     }
 
     /**

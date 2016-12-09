@@ -119,14 +119,59 @@ class ProductosController extends Controller
     public function update(ProductosUpdateRequest $request, $id)
     {
         $producto=Productos::find($id);
-        $producto->fill($request->all());
-        $producto->save();
+        $proveedor=Proveedor::find($producto->codgo_prov); 
 
-        $directorio="\Farma"."\Prueba.jpg";
-        \Storage::disk('farma')->put($directorio, \File::get($request->plantlla_vtaplaza));
+        $producto->fill($request->all());
+
+        $nameDirectory="/Farma/".$proveedor->razonsocial."-".$proveedor->nit;
+
+        if ($request->pltlla_vtaplaza != "") {
+            $nameFile=$request->pltlla_vtaplaza->getClientOriginalName();
+            $directorio=$nameDirectory."/".$nameFile;
+            \Storage::disk('farma')->put($directorio, \File::get($request->pltlla_vtaplaza));
+            $producto->plantlla_vtaplaza = $nameFile;
+        }
+
+        if ($request->pltlla_vtaimpprove != "") {        
+            $nameFile=$request->pltlla_vtaimpprove->getClientOriginalName();
+            $directorio=$nameDirectory."/".$nameFile;
+            \Storage::disk('farma')->put($directorio, \File::get($request->pltlla_vtaimpprove));
+            $producto->plantlla_vtaimpprove = $nameFile;
+        }
+
+        if ($request->pltlla_calbrcion != "") {
+            $nameFile=$request->pltlla_calbrcion->getClientOriginalName();
+            $directorio=$nameDirectory."/".$nameFile;
+            \Storage::disk('farma')->put($directorio, \File::get($request->pltlla_calbrcion));
+            $producto->plantlla_calbrcion = $nameFile;
+        }
+
+        if ($request->pltlla_valdcion != "") { 
+            $nameFile=$request->pltlla_valdcion->getClientOriginalName();
+            $directorio=$nameDirectory."/".$nameFile;
+            \Storage::disk('farma')->put($directorio, \File::get($request->pltlla_valdcion));
+            $producto->plantlla_valdcion = $nameFile;
+        }
+
+        if ($request->pltlla_corrctvo != "") {
+            $nameFile=$request->pltlla_corrctvo->getClientOriginalName();
+            $directorio=$nameDirectory."/".$nameFile;
+            \Storage::disk('farma')->put($directorio, \File::get($request->pltlla_corrctvo));
+            $producto->plantlla_corrctvo = $nameFile;
+        }
+
+        if ($request->pltlla_mantnmiento != "") {        
+            $nameFile=$request->pltlla_mantnmiento->getClientOriginalName();
+            $directorio=$nameDirectory."/".$nameFile;
+            \Storage::disk('farma')->put($directorio, \File::get($request->pltlla_mantnmiento));
+            $producto->plantlla_mantnmiento = $nameFile;
+        }
+
+        $producto->save();
 
         Session::flash('message','Producto Actualizado Correctamente');
         return Redirect::to('/productos');
+
     }
 
     /**

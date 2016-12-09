@@ -5,57 +5,63 @@
 </div>
 
 <div class="form-group">
-	<label for="referencia" class="col-md-4 control-label">Referencia</label>
+	<label for="referencia" class="col-md-3 control-label">Referencia</label>
 	<div class="col-md-6">
 		<output id="referencia" type="text" class="form-control" name="referencia">{{$prod->referencia}}</output>
 	</div>
 </div>
 
 <div class="form-group">
-	<label for="descrpcion" class="col-md-4 control-label">Producto</label>
+	<label for="descrpcion" class="col-md-3 control-label">Producto</label>
 	<div class="col-md-6">
-		<output id="descrpcion" type="text" class="form-control" name="descrpcion" >{{$prod->descrpcion}}
+		<output id="descrpcion" type="text" class="form-control" name="descrpcion">{{$prod->descrpcion}}</output>
 	</div>
 </div>
 
 <div class="form-group">
-	<label class="col-md-4 control-label">Venta Plaza</label>
-	<div class="col-md-6">
-		{!!Form::file('plantlla_vtaplaza')!!}
+	<label class="col-md-3 control-label">Venta Plaza</label>
+	<div class="col-md-4">
+		{!!Form::file('pltlla_vtaplaza')!!}
 	</div>
+	<output id="vtaplaza" type="text" class="col-md-5" name="vtaplaza">{{$prod->plantlla_vtaplaza}}</output>
 </div>
 
-<div class="form-group{{ $errors->has('plantlla_vtaimpprove') ? ' has-error' : '' }}">
-	<label for="plantlla_vtaimpprove" class="col-md-4 control-label">Venta Imp Prove</label>
-	<div class="col-md-6">
-	    <input id="plantlla_vtaimpprove" type="text" class="form-control" name="plantlla_vtaimpprove" value="{{$prod->plantlla_vtaimpprove or ''}}">
+<div class="form-group">
+	<label class="col-md-3 control-label">Venta Imp Prove</label>
+	<div class="col-md-4">
+		{!!Form::file('pltlla_vtaimpprove')!!}
 	</div>
+	<output id="vtaimpprove" type="text" class="col-md-5" name="vtaimpprove">{{$prod->plantlla_vtaimpprove}}</output>
 </div>
 
-<div class="form-group{{ $errors->has('plantlla_calbrcion') ? ' has-error' : '' }}">
-	<label for="plantlla_calbrcion" class="col-md-4 control-label">Calibración</label>
-	<div class="col-md-6">
-	    <input id="plantlla_calbrcion" type="text" class="form-control" name="plantlla_calbrcion" value="{{$prod->plantlla_calbrcion or ''}}">
+<div class="form-group">
+	<label class="col-md-3 control-label">Calibración</label>
+	<div class="col-md-4">
+		{!!Form::file('pltlla_calbrcion')!!}
 	</div>
+	<output id="calbrcion" type="text" class="col-md-5" name="calbrcion">{{$prod->plantlla_calbrcion}}</output>
 </div>
 
-<div class="form-group{{ $errors->has('plantlla_valdcion') ? ' has-error' : '' }}">
-	<label for="plantlla_valdcion" class="col-md-4 control-label">Validación</label>
-	<div class="col-md-6">
-		<input id="plantlla_valdcion" type="text" class="form-control" name="plantlla_valdcion" value="{{$prod->plantlla_valdcion or ''}}">
+<div class="form-group">
+	<label class="col-md-3 control-label">Validación</label>
+	<div class="col-md-4">
+		{!!Form::file('pltlla_valdcion')!!}
 	</div>
+	<output id="valdcion" type="text" class="col-md-5" name="valdcion">{{$prod->plantlla_valdcion}}</output>
 </div>
 
-<div class="form-group{{ $errors->has('plantlla_corrctvo') ? ' has-error' : '' }}">
-	<label for="plantlla_corrctvo" class="col-md-4 control-label">Correctivo</label>
-	<div class="col-md-6">
-		<input id="plantlla_corrctvo" type="text" class="form-control" name="plantlla_corrctvo" value="{{$prod->plantlla_corrctvo or ''}}">
+<div class="form-group">
+	<label class="col-md-3 control-label">Correctivo</label>
+	<div class="col-md-4">
+		{!!Form::file('pltlla_corrctvo')!!}
 	</div>
+	<output id="corrctvo" type="text" class="col-md-5" name="corrctvo">{{$prod->plantlla_corrctvo}}</output>	
 </div>
 
-<div class="form-group{{ $errors->has('plantlla_mantnmiento') ? ' has-error' : '' }}">
-	<label for="plantlla_mantnmiento" class="col-md-4 control-label">Mantenimiento</label>
-	<div class="col-md-6">
-		<input id="plantlla_mantnmiento" type="text" class="form-control" name="plantlla_mantnmiento" value="{{$prod->plantlla_mantnmiento or ''}}">
+<div class="form-group">
+	<label class="col-md-3 control-label">Mantenimiento</label>
+	<div class="col-md-4">
+		{!!Form::file('pltlla_mantnmiento')!!}
 	</div>
-</div>   
+	<output id="mantnmiento" type="text" class="col-md-5" name="mantnmiento">{{$prod->plantlla_mantnmiento}}</output>	
+</div>

@@ -44,6 +44,7 @@ class MenuComposer
     public function compose(View $view)
     {
         $this->managerMenus();
+        Log::info('Auth::user()->id: '.Auth::user()->id);
         $view->with('menus', Cache::get('menus'.Auth::user()->id));
     }
 
