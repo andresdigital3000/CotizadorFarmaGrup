@@ -27,8 +27,10 @@ class UserUpdateRequest extends Request
             'nombre' => 'required',
             'extension' => 'required',
             'cargo' => 'required',
-            'email' => 'required|email|max:255',
-            'name' => 'required|max:255',
+            'email' => 'required|email|max:25',
+            'name' => 'required|max:15',
+            'password' => 'required|min:6',
+            'password-confirm' => 'required|min:6',
         ];
     }
 }

@@ -51,7 +51,18 @@ class PerfilesController extends Controller
 
         Perfiles::create($request->all()); 
         $perf=DB::table('perfiles')->where('nomperfil',$request['nomperfil'])->first(); 
-        $paginas=Paginas::paginate(10);  
+        $checkVer = DB::table('perf__pagis as pp')
+                ->selectRaw('count(pp.id)')->whereRaw('pp.cod_perf = '.$perfil->id.' and pp.cod_pagina=paginas.id and pp.ver = 1');
+
+        $checkAct = DB::table('perf__pagis as pp')
+                ->selectRaw('count(pp.id)')->whereRaw('pp.cod_perf = '.$perfil->id.' and pp.cod_pagina=paginas.id and pp.actualizar = 1');
+
+        $checkEli = DB::table('perf__pagis as pp')
+                ->selectRaw('count(pp.id)')->whereRaw('pp.cod_perf = '.$perfil->id.' and pp.cod_pagina=paginas.id and pp.eliminar = 1'); 
+
+        $paginas=Paginas::from('paginas')
+                ->select('*',DB::raw('('.$checkVer->toSql().') as sCheckVer'),DB::raw('('.$checkAct->toSql().') as sCheckAct'),DB::raw('('.$checkEli->toSql().') as sCheckEli'))
+                ->get(); 
         return view('perf_pag.index',compact('perf','paginas'));
     }
 

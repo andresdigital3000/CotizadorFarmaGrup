@@ -7,8 +7,8 @@
 			<th>Cargo</th>
 			<th>Extension</th>
 			<th>Correo</th>
-			<th>Editar</th>
-			<th>Eliminar</th>
+			<th style="text-align:center">Editar</th>
+			<th style="text-align:center">Eliminar</th>
 		</thead>
 		@foreach($users as $user)
 			<tbody>
@@ -16,10 +16,10 @@
 				<td>{{$user->cargo}}</td>
 				<td>{{$user->extension}}</td>
 				<td>{{$user->email}}</td>
-				<td>
+				<td style="text-align:center">
 					{!!link_to_route('usuario.edit', $title = 'Editar', $parameters = $user->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
-				<td>
+				<td style="text-align:center">
 					{!!Form::open(['route'=>['usuario.destroy', $user->id], 'method'=>'DELETE'])!!}
 						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
 					{!!Form::close()!!}

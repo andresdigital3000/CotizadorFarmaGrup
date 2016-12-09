@@ -28,9 +28,10 @@ class UserCreateRequest extends Request
             'nombre' => 'required',
             'extension' => 'required',
             'cargo' => 'required',
-            'email' => 'required|email|max:255|unique:users',
-            'name' => 'required|max:255|unique:users',
+            'email' => 'required|email|max:25|unique:users',
+            'name' => 'required|max:15|unique:users',
             'password' => 'required|min:6',
+            'password-confirm' => 'required|min:6',
         ];
     }
 }

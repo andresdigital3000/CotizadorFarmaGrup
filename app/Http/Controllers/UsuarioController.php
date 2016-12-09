@@ -47,8 +47,9 @@ class UsuarioController extends Controller
         Log::info('UsuarioController - create');
         $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
         $datosDep = DB::table('dependencias')->lists('dependencia','id');
+        $conferr = " ";
 
-        return view('usuario.create',compact('datosPerf','datosDep'));
+        return view('usuario.create',compact('datosPerf','datosDep','conferr'));
     }
 
     /**
@@ -59,9 +60,20 @@ class UsuarioController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        User::create($request->all());
-        Session::flash('message','Usuario Creado Correctamente');
-        return Redirect::to('/usuario');
+        //Validar contraseñas iguales
+        $pass = $request->input('password');
+        $conf = $request->input('password-confirm');
+        if(strcmp ($pass,$conf ) == 0){
+            User::create($request->all());       
+            Session::flash('message','Usuario Creado Correctamente');
+            return Redirect::to('/usuario');
+        }else{
+            $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
+            $datosDep = DB::table('dependencias')->lists('dependencia','id');
+            $conferr = "No coinciden las contraseñas!!! - Verifique";
+            $request->flash();
+            return view('usuario.create',compact('datosPerf','datosDep','conferr'));
+        }
     }
 
     /**
@@ -86,7 +98,8 @@ class UsuarioController extends Controller
         $user=User::find($id);        
         $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
         $datosDep = DB::table('dependencias')->lists('dependencia','id');
-        return view('usuario.editar',compact('user','datosPerf','datosDep'));
+        $conferr = " ";
+        return view('usuario.editar',compact('user','datosPerf','datosDep','conferr'));
     }
 
     /**
@@ -97,13 +110,23 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UserUpdateRequest $request, $id)
-    {
+    {      
         $user=User::find($id);
-        $user->fill($request->all());
-        $user->save();
-        
-        Session::flash('message','Usuario Actualizado Correctamente');
-        return Redirect::to('/usuario');
+        //Validar contraseñas iguales
+        $pass = $request->input('password');
+        $conf = $request->input('password-confirm');
+        if(strcmp ($pass,$conf ) == 0){
+            $user->fill($request->all());
+            $user->save();            
+            Session::flash('message','Usuario Actualizado Correctamente');
+            return Redirect::to('/usuario');
+        }else{
+            $datosPerf = DB::table('perfiles')->lists('nomperfil','id');
+            $datosDep = DB::table('dependencias')->lists('dependencia','id');
+            $conferr = "No coinciden las contraseñas!!! - Verifique";
+            $request->flash();            
+            return view('usuario.editar',compact('user','datosPerf','datosDep','conferr'));
+        }     
     }
 
     /**

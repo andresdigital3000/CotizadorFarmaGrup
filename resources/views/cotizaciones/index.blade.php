@@ -8,6 +8,8 @@
 			<th>Extension</th>
 			<th>Correo</th>
 			<th>Operacion</th>
+			<th style="text-align:center">Editar</th>
+			<th style="text-align:center">Eliminar</th>
 		</thead>
 		@foreach($cotis as $cotizacion)
 			<tbody>
@@ -15,11 +17,11 @@
 				<td>{{$cotizacion->cargo}}</td>
 				<td>{{$cotizacion->extension}}</td>
 				<td>{{$cotizacion->email}}</td>
-				<td>
+				<td style="text-align:center">
 					{!!link_to_route('cotizaciones.edit', $title = 'Editar', $parameters = $cotizacion->id, $attributes = ['class'=>'btn btn-primary'])!!}
 				</td>
-				<td>
-					{!!Form::open(['route'=>['cotizaciones.destroy', $cotizacion->id], 'method'=>'DELETE', 'align'=>'right'])!!}
+				<td style="text-align:center">
+					{!!Form::open(['route'=>['cotizaciones.destroy', $cotizacion->id], 'method'=>'DELETE'])!!}
 						{!!Form::submit('Eliminar',['class'=>'btn btn-danger'])!!}
 					{!!Form::close()!!}
 				</td>
