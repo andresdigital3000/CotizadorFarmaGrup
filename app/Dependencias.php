@@ -1,12 +1,12 @@
 <?php
 
-namespace Cotizador_Farmagroup;
+namespace CotizadorAF;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Dependencias extends Model
 {
-    protected $table= "Dependencias";
+    protected $table= "dependencias";
 
-    protected $fillable = array('dependencia');
+    protected $fillable = ['dependencia'];
 }

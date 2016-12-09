@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Events;
+namespace CotizadorAF\Events;
 
 abstract class Event
 {

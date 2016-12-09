@@ -67,8 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => 'Cotizador_Farmagroup\User',
-            'table' => 'users',
+            'model' => CotizadorAF\User::class,
         ],
 
         // 'users' => [

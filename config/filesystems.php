@@ -54,6 +54,11 @@ return [
             'visibility' => 'public',
         ],
 
+        'farma' => [
+            'driver' => 'local',
+            'root' => 'D:',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

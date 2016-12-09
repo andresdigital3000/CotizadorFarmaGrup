@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Providers;
+namespace CotizadorAF\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Cotizador_Farmagroup\Events\SomeEvent' => [
-            'Cotizador_Farmagroup\Listeners\EventListener',
+        'CotizadorAF\Events\SomeEvent' => [
+            'CotizadorAF\Listeners\EventListener',
         ],
     ];
 

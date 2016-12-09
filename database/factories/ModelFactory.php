@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(Cotizador_Farmagroup\User::class, function (Faker\Generator $faker) {
+$factory->define(CotizadorAF\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

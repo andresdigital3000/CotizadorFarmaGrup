@@ -1,22 +1,27 @@
-@extends('layouts.admin')
-
+@extends('layouts.master')
 @section('content')
+	<div>
+	    <div class="row">
+	        <div class="col-md-8 col-md-offset-2">
+	            <div class="panel panel-default">
+	                <div class="panel-heading" align="center"><font size="4">Registro Empleado</font></div>
+	                <div class="panel-body">
+	                	{!!Form::open(['route'=>'usuario.store','method'=>'POST','class'=>'form-horizontal','role'=>'form'])!!}	 
+	                        {{ csrf_field() }}
 
-  {!!Form::open(['route'=>'usuario.store','method'=>'POST'])!!}
-    <div class="form-group">
-      {!!Form::label('Nombre:')!!}
-      {!!Form::text('name',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre del usuario'])!!}
-    </div>
-    <div class="form-group">
-      {!!Form::label('Correo:')!!}
-      {!!Form::text('email',null,['class'=>'form-control','placeholder'=>'Ingresa el correo'])!!}
-    </div>
-    <div class="form-group">
-      {!!Form::label('Contraseña:')!!}
-      {!!Form::password('password',['class'=>'form-control','placeholder'=>'Ingresa el password'])!!}
-    </div>
-    {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!}
+	                        @include('usuario.forms.usr')
 
-  {!!Form::close()!!}
-
-@stop
+	                        <div class="form-group">
+	                            <div class="col-md-6 col-md-offset-4">
+	                                <button type="submit" class="btn btn-primary">
+	                                    <i class="fa fa-btn fa-user"></i> Registrar
+	                                </button>
+	                            </div>
+	                        </div>
+	                    {!!Form::close()!!}
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+@endsection

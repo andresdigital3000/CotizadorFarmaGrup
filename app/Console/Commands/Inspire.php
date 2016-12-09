@@ -1,6 +1,6 @@
 <?php
 
-namespace Cotizador_Farmagroup\Console\Commands;
+namespace CotizadorAF\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
